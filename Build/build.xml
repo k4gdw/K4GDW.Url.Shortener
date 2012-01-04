@@ -8,11 +8,11 @@
 
 	<Target Name="Clean">
 		<ItemGroup>
-			<Content Include="$(SolutionDir)Deploy\*.*" />
+			<BinFiles Include="$(SolutionDir)Deploy\**\*.*" />
 			<Projects Include="$(SolutionDir)K4GDW.Url.Shortener.sln" />
 		</ItemGroup>
 		<Message Text="Cleaning Binaries..." />
-		<Delete Files="@(Content)" />
+		<Delete Files="@(BinFiles)" />
 		<MSBuild Projects="@(Projects)"
 				 Targets="Clean" />
 	</Target>
@@ -42,14 +42,14 @@
 			<Content Include="$(SolutionDir)K4GDW.Url.Shortener\bin\Release\K4GDW.Url.Shortener.exe" />
 			<Content Include="$(SolutionDir)K4GDW.Url.Shortener\bin\Release\*.dll" />
 			<Content Include="$(SolutionDir)K4GDW.Url.Shortener\bin\Release\*.txt" />
+			<Content Include="$(MSBuildProjectDirectory)*.png" />
 		</ItemGroup>
 		<Message Text="Deploying..." />
+		<MakeDir Directories="$(SolutionDir)Deploy;$(SolutionDir)Deploy\temp" />
 		<Copy SourceFiles="@(Content)"
-			  DestinationFolder="$(SolutionDir)Deploy\" />
-		<Exec Command="wzzip.exe $(SolutionDir)\Deploy\K4GDW.Url.Shortener.zip $(SolutionDir)Deploy\*.*" />
+			  DestinationFolder="$(SolutionDir)Deploy\temp\" />
+		<Exec Command="wzzip.exe $(SolutionDir)\Deploy\K4GDW.Url.Shortener.zip $(SolutionDir)Deploy\temp\*.*" />
 		<Exec Command="md5.exe -n -o$(SolutionDir)\Deploy\md5.txt $(SolutionDir)\Deploy\K4GDW.Url.Shortener.zip" />
-		<Delete Files="$(SolutionDir)Deploy\*.exe" />
-		<Delete Files="$(SolutionDir)Deploy\*.dll" />
 	</Target>
 	
 </Project>
