@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003"
+		 DefaultTargets="Build">
+	<Import Project="$(MSBuildExtensionsPath)\MSBuildCommunityTasks\MSBuild.Community.Tasks.Targets" />
+    <PropertyGroup>
+	    <SolutionDir>$(MSBuildProjectDirectory)\..\</SolutionDir>
+  	</PropertyGroup>
+
+	<Target Name="Clean">
+		<ItemGroup>
+			<Content Include="$(SolutionDir)Deploy\*.exe" />
+			<Content Include="$(SolutionDir)Deploy\*.dll" />
+		</ItemGroup>
+		<Message Text="Cleaning Binaries..." />
+		<Delete Files="@(Content)" />
+	</Target>
+
+	<Target Name="BuildCore">
+		<ItemGroup>
+			<Projects Include="$(SolutionDir)BitlyLib\BitlyLib.vbproj" />
+			<Projects Include="$(SolutionDir)isgdLib\isgdLib.vbproj" />
+			<Projects Include="$(SolutionDir)TinyURLLib\TinyURLLib.vbproj" />
+		</ItemGroup>
+		<Message Text="Release Building ..." />
+		<MSBuild Projects="@(Projects)"
+				 Targets="Build"
+				 Properties="Configuration=Release"/>
+	</Target>
+	<Target Name="Build"
+			DependsOnTargets="BuildCore">
+		<Message Text="Release Building ..." />
+		<MSBuild Projects="$(SolutionDir)K4GDW.Url.Shortener\K4GDW.Url.Shortener.vbproj"
+				 Targets="Build"
+				 Properties="Configuration=Release"/>
+	</Target>
+
+	<Target Name="Deploy"
+			DependsOnTargets="Clean;Build">
+		<ItemGroup>
+			<Content Include="$(SolutionDir)K4GDW.Url.Shortener\bin\Release\*.exe" />
+			<Content Include="$(SolutionDir)K4GDW.Url.Shortener\bin\Release\*.dll" />
+			<Content Include="$(SolutionDir)K4GDW.Url.Shortener\bin\Release\*.zip" />
+			<Content Include="$(SolutionDir)K4GDW.Url.Shortener\bin\Release\*.txt" />
+		</ItemGroup>
+		<Message Text="Deploying..." />
+		<Copy SourceFiles="@(Content)"
+			  DestinationFolder="$(SolutionDir)Deploy\" />
+		<Exec Command="wzzip.exe $(SolutionDir)\Deploy\K4GDW.Url.Shortener.zip $(SolutionDir)Deploy\*.*" />
+		<Exec Command="md5.exe -n -o$(SolutionDir)\Deploy\md5.txt $(SolutionDir)\Deploy\K4GDW.Url.Shortener.zip" />
+		<Delete Files="$(SolutionDir)Deploy\*.exe" />
+		<Delete Files="$(SolutionDir)Deploy\*.dll" />
+	</Target>
+	
+</Project>

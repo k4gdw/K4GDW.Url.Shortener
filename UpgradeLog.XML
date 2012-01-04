@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type='text/xsl' href='_UpgradeReport_Files/UpgradeReport.xslt'?><UpgradeLog>
+<Properties><Property Name="Solution" Value="K4GDW.Url.Shortener">
+</Property><Property Name="Solution File" Value="C:\K4GDW.Projects\K4GDW.Url.Shortener\K4GDW.Url.Shortener.sln">
+</Property><Property Name="Date" Value="Tuesday, January 03, 2012">
+</Property><Property Name="Time" Value="17:39 PM">
+</Property></Properties><Event ErrorLevel="0" Project="K4GDW.URL.Shortener" Source="K4GDW.URL.Shortener\K4GDW.URL.Shortener.vbproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="K4GDW.URL.Shortener" Source="K4GDW.URL.Shortener\K4GDW.URL.Shortener.vbproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="BitlyLib" Source="BitlyLib\BitlyLib.vbproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="BitlyLib" Source="BitlyLib\BitlyLib.vbproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="TinyURLLib" Source="TinyURLLib\TinyURLLib.vbproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="TinyURLLib" Source="TinyURLLib\TinyURLLib.vbproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="isgdLib" Source="isgdLib\isgdLib.vbproj" Description="Project converted successfully">
+</Event><Event ErrorLevel="3" Project="isgdLib" Source="isgdLib\isgdLib.vbproj" Description="Converted">
+</Event><Event ErrorLevel="0" Project="" Source="K4GDW.Url.Shortener.sln" Description="Solution converted successfully">
+</Event><Event ErrorLevel="3" Project="" Source="K4GDW.Url.Shortener.sln" Description="Converted">
+</Event><Event ErrorLevel="0" Project="K4GDW.URL.Shortener" Source="K4GDW.URL.Shortener\K4GDW.URL.Shortener.vbproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="BitlyLib" Source="BitlyLib\BitlyLib.vbproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="TinyURLLib" Source="TinyURLLib\TinyURLLib.vbproj" Description="Scan complete: Upgrade not required for project files.">
+</Event><Event ErrorLevel="0" Project="isgdLib" Source="isgdLib\isgdLib.vbproj" Description="Scan complete: Upgrade not required for project files.">
+</Event></UpgradeLog>
