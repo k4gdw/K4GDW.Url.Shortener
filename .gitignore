@@ -9,3 +9,6 @@ _ReSharper.*/
 Sync*.dat
 *.user
 *.docstates
+*.dll
+*.exe
+README.txt
