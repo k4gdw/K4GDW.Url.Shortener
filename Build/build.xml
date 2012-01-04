@@ -9,9 +9,12 @@
 	<Target Name="Clean">
 		<ItemGroup>
 			<Content Include="$(SolutionDir)Deploy\*.*" />
+			<Projects Include="$(SolutionDir)K4GDW.Url.Shortener.sln" />
 		</ItemGroup>
 		<Message Text="Cleaning Binaries..." />
 		<Delete Files="@(Content)" />
+		<MSBuild Projects="@(Projects)"
+				 Targets="Clean" />
 	</Target>
 
 	<Target Name="BuildCore">
