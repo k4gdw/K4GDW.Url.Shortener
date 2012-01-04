@@ -32,7 +32,7 @@ Namespace My
         
         <Global.System.Diagnostics.DebuggerStepThroughAttribute()>  _
         Protected Overrides Sub OnCreateMainForm()
-            Me.MainForm = Global.K4GDW.URL_Shortener.Main
+            Me.MainForm = Global.K4GDW.URL.Shortener.Main
         End Sub
     End Class
 End Namespace

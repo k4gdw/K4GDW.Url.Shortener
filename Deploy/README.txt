@@ -12,16 +12,18 @@ clipboard.
 
 Versions:
 
-1.0 -		Initial release.
-
-1.1 -		Added URL validation to make sure the URL is valid before
-			calling the bit.ly or tinyurl.com api.
-
-1.1.1 -	Fixed a bug in the URL validation function that caused some
-			URLs to get http:// inserted when it shouldn't.
-				
-1.2.0 -	This is a minor change that should preempt further bugs in the
-			URL validation.  Instead of trying to fix an invalid URL, it now
-			leaves the buttons disabled until a valid URL is entered.
+3.0.0	-	Upgraded project to Visual Studio 2010 and .Net 4.0 framework.
 			
 2.0.0	-	Added support for the is.gd service.
+				
+1.2.0 	-	This is a minor change that should preempt further bugs in the
+			URL validation.  Instead of trying to fix an invalid URL, it now
+			leaves the buttons disabled until a valid URL is entered.
+
+1.1.1	-	Fixed a bug in the URL validation function that caused some
+			URLs to get http:// inserted when it shouldn't.
+
+1.1.0 	-	Added URL validation to make sure the URL is valid before
+			calling the bit.ly or tinyurl.com api.
+
+1.0.0	-	Initial release.

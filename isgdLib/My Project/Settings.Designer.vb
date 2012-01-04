@@ -64,9 +64,9 @@ Namespace My
     Friend Module MySettingsProperty
         
         <Global.System.ComponentModel.Design.HelpKeywordAttribute("My.Settings")>  _
-        Friend ReadOnly Property Settings() As Global.K4GDW.IsGdLib.My.MySettings
+        Friend ReadOnly Property Settings() As Global.K4GDW.Url.Shortener.My.MySettings
             Get
-                Return Global.K4GDW.IsGdLib.My.MySettings.Default
+                Return Global.K4GDW.Url.Shortener.My.MySettings.Default
             End Get
         End Property
     End Module

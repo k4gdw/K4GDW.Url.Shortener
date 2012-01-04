@@ -8,8 +8,7 @@
 
 	<Target Name="Clean">
 		<ItemGroup>
-			<Content Include="$(SolutionDir)Deploy\*.exe" />
-			<Content Include="$(SolutionDir)Deploy\*.dll" />
+			<Content Include="$(SolutionDir)Deploy\*.*" />
 		</ItemGroup>
 		<Message Text="Cleaning Binaries..." />
 		<Delete Files="@(Content)" />
@@ -37,9 +36,8 @@
 	<Target Name="Deploy"
 			DependsOnTargets="Clean;Build">
 		<ItemGroup>
-			<Content Include="$(SolutionDir)K4GDW.Url.Shortener\bin\Release\*.exe" />
+			<Content Include="$(SolutionDir)K4GDW.Url.Shortener\bin\Release\K4GDW.Url.Shortener.exe" />
 			<Content Include="$(SolutionDir)K4GDW.Url.Shortener\bin\Release\*.dll" />
-			<Content Include="$(SolutionDir)K4GDW.Url.Shortener\bin\Release\*.zip" />
 			<Content Include="$(SolutionDir)K4GDW.Url.Shortener\bin\Release\*.txt" />
 		</ItemGroup>
 		<Message Text="Deploying..." />

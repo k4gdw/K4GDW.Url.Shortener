@@ -1,7 +1,4 @@
-﻿Imports K4GDW.BitlyLib
-Imports K4GDW.TinyURLLib
-Imports K4GDW.IsGdLib
-Imports System.Text.RegularExpressions
+﻿Imports System.Text.RegularExpressions
 
 Public Class Main
 

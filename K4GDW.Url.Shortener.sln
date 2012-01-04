@@ -74,12 +74,10 @@ Global
 		{29FD5908-1071-4F39-AD35-00AAEF1F7D53}.Release|x86.ActiveCfg = Release|Any CPU
 		{4EBF0A5E-E714-4CFE-935B-8DAC7E7A9B92}.Debug|Any CPU.ActiveCfg = Debug|x86
 		{4EBF0A5E-E714-4CFE-935B-8DAC7E7A9B92}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
-		{4EBF0A5E-E714-4CFE-935B-8DAC7E7A9B92}.Debug|Mixed Platforms.Build.0 = Debug|x86
 		{4EBF0A5E-E714-4CFE-935B-8DAC7E7A9B92}.Debug|x86.ActiveCfg = Debug|x86
 		{4EBF0A5E-E714-4CFE-935B-8DAC7E7A9B92}.Debug|x86.Build.0 = Debug|x86
 		{4EBF0A5E-E714-4CFE-935B-8DAC7E7A9B92}.Release|Any CPU.ActiveCfg = Release|x86
 		{4EBF0A5E-E714-4CFE-935B-8DAC7E7A9B92}.Release|Mixed Platforms.ActiveCfg = Release|x86
-		{4EBF0A5E-E714-4CFE-935B-8DAC7E7A9B92}.Release|Mixed Platforms.Build.0 = Release|x86
 		{4EBF0A5E-E714-4CFE-935B-8DAC7E7A9B92}.Release|x86.ActiveCfg = Release|x86
 		{4EBF0A5E-E714-4CFE-935B-8DAC7E7A9B92}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
