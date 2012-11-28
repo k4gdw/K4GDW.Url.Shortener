@@ -1,6 +1,6 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "K4GDW.URL.Shortener", "K4GDW.URL.Shortener\K4GDW.URL.Shortener.vbproj", "{36C521D5-D24B-48C0-AC2A-0FDBFED72490}"
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "BitlyLib", "BitlyLib\BitlyLib.vbproj", "{B001E9F0-DED7-4C95-B5E6-4FFDFAC6EBC4}"
@@ -20,7 +20,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{639E24
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
-Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "Build", "Build\Build.vbproj", "{4EBF0A5E-E714-4CFE-935B-8DAC7E7A9B92}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Build", "Build", "{0D80FD09-8722-4E9D-9658-06BF6DAE4B34}"
+	ProjectSection(SolutionItems) = preProject
+		Build\build.bat = Build\build.bat
+		Build\build.xml = Build\build.xml
+		Build\kus.png = Build\kus.png
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -72,14 +77,6 @@ Global
 		{29FD5908-1071-4F39-AD35-00AAEF1F7D53}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{29FD5908-1071-4F39-AD35-00AAEF1F7D53}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{29FD5908-1071-4F39-AD35-00AAEF1F7D53}.Release|x86.ActiveCfg = Release|Any CPU
-		{4EBF0A5E-E714-4CFE-935B-8DAC7E7A9B92}.Debug|Any CPU.ActiveCfg = Debug|x86
-		{4EBF0A5E-E714-4CFE-935B-8DAC7E7A9B92}.Debug|Mixed Platforms.ActiveCfg = Debug|x86
-		{4EBF0A5E-E714-4CFE-935B-8DAC7E7A9B92}.Debug|x86.ActiveCfg = Debug|x86
-		{4EBF0A5E-E714-4CFE-935B-8DAC7E7A9B92}.Debug|x86.Build.0 = Debug|x86
-		{4EBF0A5E-E714-4CFE-935B-8DAC7E7A9B92}.Release|Any CPU.ActiveCfg = Release|x86
-		{4EBF0A5E-E714-4CFE-935B-8DAC7E7A9B92}.Release|Mixed Platforms.ActiveCfg = Release|x86
-		{4EBF0A5E-E714-4CFE-935B-8DAC7E7A9B92}.Release|x86.ActiveCfg = Release|x86
-		{4EBF0A5E-E714-4CFE-935B-8DAC7E7A9B92}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
