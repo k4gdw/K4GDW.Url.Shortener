@@ -1,8 +1,11 @@
 ﻿Imports System.Web
 Imports System.Xml.Linq
+Imports System.Threading.Tasks
+Imports System.Net
+Imports System.IO
 
 ''' <summary>
-''' This class handles talking to the bit.ly URL shortening service.
+''' This class handles talking to the bit.ly longUrl shortening service.
 ''' </summary>
 ''' <remarks>
 ''' <para>
@@ -17,24 +20,42 @@ Public Class BitlyApi
 	Private Const login As String = "k4gdw"
 
 	''' <summary>
-	''' Shortens the URL.
+	''' Gets the shortened url from Bit.ly asynchronously
 	''' </summary>
-	''' <param name="longUrl">The long URL.</param>
-	''' <returns></returns>
+	''' <param name="longUrl">The long longUrl.</param>
+	''' <returns>Task{System.String}.</returns>
 	''' <remarks>
 	''' <para>
 	''' Created By:  Bryan Johns<br />
 	''' On:  3/18/2010 at 3:18 PM
 	''' </para>
 	''' </remarks>
-	Public Shared Function ShortenUrl(ByVal longUrl As String) As BitlyResults
-		Dim url = String.Format("http://api.bit.ly/shorten?format=xml&version=2.0.1&longUrl={0}&login={1}&apiKey={2}", HttpUtility.UrlEncode(longUrl), login, apiKey)
-		Dim resultXml As XDocument
-		resultXml = XDocument.Load(url)
-		Dim x = (From result In resultXml.Descendants("nodeKeyVal") _
-		  Select New BitlyResults(result.Descendants("hash").Value.ToString, result.Descendants("shortUrl").Value.ToString))
-        Return x.FirstOrDefault
-    End Function
+	Public Shared Async Function ShortenUrlAsync(ByVal longUrl As String) As Task(Of String)
+		Try
+			Dim url = String.Format("http://api.bit.ly/shorten?format=xml&version=2.0.1&longUrl={0}&login={1}&apiKey={2}",
+			                        HttpUtility.UrlEncode(longUrl),
+			                        login,
+			                        apiKey)
+			Dim req As WebRequest = WebRequest.Create(url)
+			Using rsp As WebResponse = Await req.GetResponseAsync()
+				Dim xdoc As XDocument
+				Using rdr As New StreamReader(rsp.GetResponseStream())
+					xdoc = XDocument.Parse(rdr.ReadToEnd())
+				End Using
+				Dim x = (From xd In xdoc.Descendants("nodeKeyVal")
+					    Select New BitlyResults(xd.Descendants("hash").Value,
+					                            xd.Descendants("shortUrl").Value))
+				Return x.FirstOrDefault.ShortUrl
+			End Using
+
+		Catch ex As WebException
+			Throw New WebException("There was an error communicating with the bit.ly service.", ex)
+		Catch ex As Exception
+			Throw New ApplicationException("There was an error getting the shortened longUrl.", ex)
+		End Try
+
+	End Function
+
 
 End Class
 

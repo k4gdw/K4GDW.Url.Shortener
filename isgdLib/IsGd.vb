@@ -1,35 +1,37 @@
 ﻿Imports System.IO
 Imports System.Net
+Imports System.Threading.Tasks
+Imports System.Web
 
 Public Class IsGd
+
 	''' <summary>
-	''' Gets the IsGD URL.
+	''' Gets the shortened Url from is.gd.
 	''' </summary>
-	''' <param name="URL">The URL.</param>
-	''' <returns></returns>
-	''' <remarks>
-	''' Created: 6/30/2009 at 12:12 PM
-	''' By: bjohns.
-	''' </remarks>
-	Public Shared Function GetIsGd(ByVal URL As String) As String
+	''' <param name="longUrl">The long URL.</param>
+	''' <returns>Task{System.String}.</returns>
+	''' <exception cref="System.ApplicationException"></exception>
+	Public Shared Async Function ShortenUrl(ByVal longUrl As String) As Task(Of String)
 		Try
-			If Not URL.ToLower().StartsWith("http") AndAlso Not URL.ToLower().StartsWith("ftp") Then
-				URL = "http://" + URL
+			If Not longUrl.ToLower().StartsWith("http") AndAlso Not longUrl.ToLower().StartsWith("ftp") Then
+				longUrl = "http://" + longUrl
 			End If
-            If URL.Length <= 18 Then
-                Return URL
-            End If
-			Dim req As WebRequest = WebRequest.Create("http://is.gd/api.php?longurl=" + URL)
-			Dim rsp As WebResponse = req.GetResponse()
-			Dim txt As String
-			Using rdr As StreamReader = New StreamReader(rsp.GetResponseStream())
-				txt = rdr.ReadToEnd()
+			If longUrl.Length <= 18 Then
+				Return longUrl
+			End If
+			Dim req As WebRequest = WebRequest.Create(String.Format("http://is.gd/create.php?url={0}&format=simple", longUrl))
+			Using rsp As WebResponse = Await req.GetResponseAsync()
+				Dim txt As String = longUrl
+				Using rdr As StreamReader = New StreamReader(rsp.GetResponseStream())
+					txt = rdr.ReadToEnd()
+				End Using
+				Return txt
 			End Using
-			Return txt
-		Catch ex As Net.WebException
+		Catch ex As WebException
 			Throw New ApplicationException("There was an error communicating with the Is.Gd service.", ex)
 		Catch ex As Exception
-			Throw New ApplicationException("There was an error getting the shortened URL.", ex)
+			Throw New ApplicationException("There was an error getting the shortened longUrl.", ex)
 		End Try
 	End Function
+
 End Class

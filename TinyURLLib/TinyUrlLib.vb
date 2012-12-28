@@ -1,8 +1,9 @@
 ﻿Imports System.IO
 Imports System.Net
+Imports System.Threading.Tasks
 
 ''' <summary>
-''' A class to handle comms with the TinyURL URL shortening service.
+''' A class to handle comms with the TinyURL longUrl shortening service.
 ''' </summary>
 ''' <remarks>
 ''' <para>
@@ -13,35 +14,33 @@ Imports System.Net
 Public Class TinyUrl
 
 	''' <summary>
-	''' Gets the tiny URL.
+	''' Shortens the url asynchronously.
 	''' </summary>
-	''' <param name="URL">The URL.</param>
-	''' <returns></returns>
-	''' <remarks>
-	''' Created: 6/30/2009 at 12:12 PM
-	''' By: bjohns.
-	''' </remarks>
-	Public Shared Function GetTinyUrl(ByVal URL As String) As String
+	''' <param name="longUrl">The long URL.</param>
+	''' <returns>Task{System.String}.</returns>
+	''' <exception cref="System.Net.WebException"></exception>
+	''' <exception cref="System.ApplicationException"></exception>
+	Public Shared Async Function ShortenUrlAsync(ByVal longUrl As String) As Task(Of String)
 		Try
-			If Not URL.ToLower().StartsWith("http") AndAlso Not URL.ToLower().StartsWith("ftp") Then
-				URL = "http://" + URL
+			If Not longUrl.ToLower().StartsWith("http") AndAlso Not longUrl.ToLower().StartsWith("ftp") Then
+				longUrl = String.Format("http://{0}", longUrl)
 			End If
-			If URL.Length <= 30 Then
-				Return URL
+			If longUrl.Length <= 30 Then
+				Return longUrl
 			End If
-			Dim req As WebRequest = WebRequest.Create("http://tinyurl.com/api-create.php?url=" + URL)
-			Dim rsp As WebResponse = req.GetResponse()
-			Dim txt As String
-			Using rdr As StreamReader = New StreamReader(rsp.GetResponseStream())
-				txt = rdr.ReadToEnd()
+			Dim req As WebRequest = WebRequest.Create(String.Format("http://tinyurl.com/api-create.php?url={0}", longUrl))
+			Using rsp As WebResponse = Await req.GetResponseAsync()
+				Dim txt As String = longUrl
+				Using rdr As StreamReader = New StreamReader(rsp.GetResponseStream())
+					txt = rdr.ReadToEnd()
+				End Using
+				Return txt
 			End Using
-			Return txt
-		Catch ex As Net.WebException
-			Throw New ApplicationException("There was an error communicating with the TinyURL.com service.", ex)
+		Catch ex As WebException
+			Throw New WebException("There was an error communicating with the TinyURL.com service.", ex)
 		Catch ex As Exception
-			Throw New ApplicationException("There was an error getting the tiny url.", ex)
+			Throw New ApplicationException("There was an error getting the tiny url from TinyUrl.com.", ex)
 		End Try
 	End Function
-
-
+	
 End Class

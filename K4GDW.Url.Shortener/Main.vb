@@ -5,11 +5,11 @@ Public Class Main
 	Private LongURL As String
 
 	''' <summary>
-	''' Determines whether the specified URL is valid.
+	''' Determines whether the specified longUrl is valid.
 	''' </summary>
-	''' <param name="url">The URL.</param>
+	''' <param name="url">The longUrl.</param>
 	''' <returns>
-	''' <c>true</c> if the specified URL is valid; otherwise, <c>false</c>.
+	''' <c>true</c> if the specified longUrl is valid; otherwise, <c>false</c>.
 	''' </returns>
 	''' <remarks>
 	''' <para>
@@ -22,30 +22,30 @@ Public Class Main
 	"([\d\w-.]+?\.(a[cdefgilmnoqrstuwz]|b[abdefghijmnorstvwyz]|c[acdfghiklmnoruvxyz]|d[ejkmnoz]|e[ceghrst]|f[ijkmnor]|g[abdefghilmnpqrstuwy]|h[kmnrtu]|i[delmnoqrst]|j[emop]|k[eghimnprwyz]|l[abcikrstuvy]|m[acdghklmnopqrstuvwxyz]|n[acefgilopruz]|om|p[aefghklmnrstwy]|qa|r[eouw]|s[abcdeghijklmnortuvyz]|t[cdfghjkmnoprtvwz]|u[augkmsyz]|v[aceginu]|w[fs]|y[etu]|z[amw]|aero|arpa|biz|com|coop|edu|info|int|gov|mil|museum|name|net|org|pro)(\b|\W(?<!&|=)(?!\.\s|\.{3}).*?))(\s|$)")
 	End Function
 
-	Private Sub btnTinyURL_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnTinyURL.Click
+	Private Async Sub btnTinyURL_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles btnTinyURL.Click
 		CacheLongURL()
-		If txtURL.Text.Contains("http://is.gd") Or txtURL.Text.Contains("http://bit.ly") Or txtURL.Text.Contains("http://is.gd") Then
-			txtURL.Text = TinyUrl.GetTinyUrl(LongURL)
+		If txtURL.Text.Contains("http://is.gd") Or txtURL.Text.Contains("http://bit.ly") Then
+			txtURL.Text = Await TinyUrl.ShortenUrlAsync(LongURL)
 		Else
-			txtURL.Text = TinyUrl.GetTinyUrl(txtURL.Text)
+			txtURL.Text = Await TinyUrl.ShortenUrlAsync(txtURL.Text)
 		End If
 		Clipboard.SetText(txtURL.Text)
 	End Sub
 
-	Private Sub btnBitly_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnBitly.Click
+	Private Async Sub btnBitly_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles btnBitly.Click
 		CacheLongURL()
-		If txtURL.Text.Contains("http://tinyurl.com") Or txtURL.Text.Contains("http://is.gd") Or txtURL.Text.Contains("http://is.gd") Then
-			txtURL.Text = BitlyApi.ShortenUrl(LongURL).ShortUrl
-        Else
-            If Not txtURL.Text.ToLower.StartsWith("http") Then
-                txtURL.Text = "http://" & txtURL.Text
-            End If
-            txtURL.Text = BitlyApi.ShortenUrl(txtURL.Text).ShortUrl
+		If txtURL.Text.Contains("http://tinyurl.com") Or txtURL.Text.Contains("http://is.gd") Then
+			txtURL.Text = Await BitlyApi.ShortenUrlAsync(LongURL)
+		Else
+			If Not txtURL.Text.ToLower.StartsWith("http") Then
+				txtURL.Text = "http://" & txtURL.Text
+			End If
+			txtURL.Text = Await BitlyApi.ShortenUrlAsync(txtURL.Text)
 		End If
 		Clipboard.SetText(txtURL.Text)
 	End Sub
 
-	Private Sub txtURL_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtURL.TextChanged
+	Private Sub txtURL_TextChanged(ByVal sender As System.Object, ByVal e As EventArgs) Handles txtURL.TextChanged
 		If IsValidURL(txtURL.Text) Then
 			EnableButtons()
 		Else
@@ -54,7 +54,7 @@ Public Class Main
 	End Sub
 
 	''' <summary>
-	''' Caches the long URL.
+	''' Caches the long longUrl.
 	''' </summary>
 	''' <remarks>
 	''' <para>
@@ -100,13 +100,14 @@ Public Class Main
 		btnIsGd.Enabled = False
 	End Sub
 
-	Private Sub btnIsGd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnIsGd.Click
+	Private Async Sub btnIsGd_Click(ByVal sender As System.Object, ByVal e As EventArgs) Handles btnIsGd.Click
 		CacheLongURL()
 		If txtURL.Text.Contains("http://tinyurl.com") Or txtURL.Text.Contains("http://bit.ly") Then
-			txtURL.Text = IsGd.GetIsGd(LongURL)
+			txtURL.Text = Await IsGd.ShortenUrl(LongURL)
 		Else
-			txtURL.Text = IsGd.GetIsGd(txtURL.Text)
+			txtURL.Text = Await IsGd.ShortenUrl(txtURL.Text)
 		End If
 		Clipboard.SetText(txtURL.Text)
 	End Sub
+
 End Class
