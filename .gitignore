@@ -19,6 +19,7 @@ obj/
 [Dd]ebug/
 [Rr]elease/
 x64/
+[Dd]eploy/*
 *_i.c
 *_p.c
 *.ilk
