@@ -70,6 +70,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to Unable to insert shortened url, &quot;{0}&quot; into clipboard..
+        '''</summary>
+        Friend ReadOnly Property ClipboardFailure() As String
+            Get
+                Return ResourceManager.GetString("ClipboardFailure", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to A shortening service must be selected.  Something really strange has happened to unselect all of the supported services.  Select one and try again.  If this message comes up again, send an email to bjohns@greendragonweb.com..
         '''</summary>
         Friend ReadOnly Property NoShortenerSelectedMessage() As String

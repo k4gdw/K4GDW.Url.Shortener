@@ -120,6 +120,9 @@
   <data name="AppName" xml:space="preserve">
     <value>K4GDW Url Shortener</value>
   </data>
+  <data name="ClipboardFailure" xml:space="preserve">
+    <value>Unable to insert shortened url, "{0}" into clipboard.</value>
+  </data>
   <data name="NoShortenerSelectedMessage" xml:space="preserve">
     <value>A shortening service must be selected.  Something really strange has happened to unselect all of the supported services.  Select one and try again.  If this message comes up again, send an email to bjohns@greendragonweb.com.</value>
   </data>

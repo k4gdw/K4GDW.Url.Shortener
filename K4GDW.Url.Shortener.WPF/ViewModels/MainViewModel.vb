@@ -124,16 +124,6 @@ Namespace ViewModels
 			Set(ByVal value As String)
 				If Not _ShortUrl = value Then
 					_ShortUrl = value
-					For i As Int16 = 1 To 10
-						Try
-							Clipboard.SetText(value)
-							_logger.LogInfo(String.Format("It took {0} tries to insert ""{1}"" into the clipboard.", i, value))
-							Exit For
-						Catch ex As Exception
-							_logger.LogError(String.Format("The following exception occurred when Clipboard.SetText(""{0}"") was called.{1}{2}", value, Environment.NewLine, ex.GetFormattedException()), ex)
-							Thread.Sleep(10)
-						End Try
-					Next
 					NotifyOfPropertyChange(Function() ShortUrl)
 				End If
 			End Set
@@ -189,21 +179,24 @@ Namespace ViewModels
 		''' <exception cref="System.ApplicationException"></exception>
 		Public Async Sub ShortenUrl()
 			Dim url As String = LongUrl,
-				selectedService As String = "Bit.Ly"
+				selectedService As String = "Bit.Ly",
+				sUrl As String = String.Empty
 			Try
 				Processing = True
 				If _UseBitly Then
 					selectedService = "Bit.Ly"
-					ShortUrl = Await BitlyApi.ShortenUrlAsync(url)
+					sUrl = Await BitlyApi.ShortenUrlAsync(url)
 				ElseIf _UseIsgd Then
 					selectedService = "Is.gd"
-					ShortUrl = Await IsGd.ShortenUrl(url)
+					sUrl = Await IsGd.ShortenUrlAsync(url)
 				ElseIf _UseTinyUrl Then
 					selectedService = "TinyUrl"
-					ShortUrl = Await TinyUrl.ShortenUrlAsync(url)
+					sUrl = Await TinyUrl.ShortenUrlAsync(url)
 				Else
 					Throw New ApplicationException(My.Resources.NoShortenerSelectedMessage)
 				End If
+				ShortUrl = sUrl
+				CopyUrlToClipboard(sUrl, 1)
 			Catch ex As WebException
 				_logger.LogError(ex)
 				MsgBox(String.Format(My.Resources.ServiceConnectionError, selectedService), vbOKOnly Or vbCritical, My.Resources.AppName)
@@ -213,6 +206,27 @@ Namespace ViewModels
 			Finally
 				Processing = False
 			End Try
+		End Sub
+
+
+		''' <summary>
+		''' Copies the URL to clipboard.
+		''' </summary>
+		''' <param name="url">The URL.</param>
+		''' <param name="maxTries">The max tries.</param>
+		Private Sub CopyUrlToClipboard(url As String, Optional maxTries As Int16 = 3)
+			Dim success As Boolean = False
+			Dim tries As Int16 = 0
+			While Not success AndAlso tries < maxTries
+				Try
+					tries += 1
+					Clipboard.SetText(url)
+					success = True
+				Catch ex As Exception
+					_logger.LogInfo(ex)
+					success = False
+				End Try
+			End While
 		End Sub
 
 	End Class

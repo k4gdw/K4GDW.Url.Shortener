@@ -93,7 +93,7 @@ ClientBin
 ~$*
 *.dbmdl
 Generated_Code #added for RIA/Silverlight projects
-[Cc]ode_[Dd]rop/ #build artifacts from msbuild scripts
+[Dd]eploy/* #build artifacts from msbuild scripts
 
 # Backup & report files from converting an old project file to a newer
 # Visual Studio version. Backup files are not needed, because we have git ;-)

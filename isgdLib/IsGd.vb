@@ -1,7 +1,6 @@
 ﻿Imports System.IO
 Imports System.Net
 Imports System.Threading.Tasks
-Imports System.Web
 
 Public Class IsGd
 
@@ -11,7 +10,7 @@ Public Class IsGd
 	''' <param name="longUrl">The long URL.</param>
 	''' <returns>Task{System.String}.</returns>
 	''' <exception cref="System.ApplicationException"></exception>
-	Public Shared Async Function ShortenUrl(ByVal longUrl As String) As Task(Of String)
+	Public Shared Async Function ShortenUrlAsync(ByVal longUrl As String) As Task(Of String)
 		Try
 			If Not longUrl.ToLower().StartsWith("http") AndAlso Not longUrl.ToLower().StartsWith("ftp") Then
 				longUrl = "http://" + longUrl
