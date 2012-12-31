@@ -39,7 +39,7 @@
 	<Target Name="Deploy"
 			DependsOnTargets="Clean;Build">
 		<ItemGroup>
-			<Binaries Include="$(SolutionDir)K4GDW.Url.Shortener.WPF\bin\Release\K4GDW.Url.Shortener.exe" />
+			<Binaries Include="$(SolutionDir)K4GDW.Url.Shortener.WPF\bin\Release\K4GDW.Url.Shortener.WPF.exe" />
 			<Binaries Include="$(SolutionDir)K4GDW.Url.Shortener.WPF\bin\Release\*.dll" />
 			<Content Include="$(SolutionDir)K4GDW.Url.Shortener.WPF\bin\Release\*.txt" />
 			<Content Include="$(MSBuildProjectDirectory)*.png" />
