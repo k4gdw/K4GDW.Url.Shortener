@@ -59,5 +59,50 @@ Namespace My.Resources
                 resourceCulture = value
             End Set
         End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to K4GDW Url Shortener.
+        '''</summary>
+        Friend ReadOnly Property AppName() As String
+            Get
+                Return ResourceManager.GetString("AppName", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to Unable to insert shortened url, &quot;{0}&quot; into clipboard..
+        '''</summary>
+        Friend ReadOnly Property ClipboardFailure() As String
+            Get
+                Return ResourceManager.GetString("ClipboardFailure", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to A shortening service must be selected.  Something really strange has happened to unselect all of the supported services.  Select one and try again.  If this message comes up again, send an email to bjohns@greendragonweb.com..
+        '''</summary>
+        Friend ReadOnly Property NoShortenerSelectedMessage() As String
+            Get
+                Return ResourceManager.GetString("NoShortenerSelectedMessage", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to There was an error connecting to the {0} service.  Try one of the others..
+        '''</summary>
+        Friend ReadOnly Property ServiceConnectionError() As String
+            Get
+                Return ResourceManager.GetString("ServiceConnectionError", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
+        '''  Looks up a localized string similar to ^(https?://)?([\d\w-.]+?\.(a[cdefgilmnoqrstuwz]|b[abdefghijmnorstvwyz]|c[acdfghiklmnoruvxyz]|d[ejkmnoz]|e[ceghrst]|f[ijkmnor]|g[abdefghilmnpqrstuwy]|h[kmnrtu]|i[delmnoqrst]|j[emop]|k[eghimnprwyz]|l[abcikrstuvy]|m[acdghklmnopqrstuvwxyz]|n[acefgilopruz]|om|p[aefghklmnrstwy]|qa|r[eouw]|s[abcdeghijklmnortuvyz]|t[cdfghjkmnoprtvwz]|u[augkmsyz]|v[aceginu]|w[fs]|y[etu]|z[amw]|aero|arpa|biz|com|coop|edu|info|int|gov|mil|museum|name|net|org|pro)(\b|\W(?&lt;!&amp;|=)(?!\.\s|\.{3}).*?))(\s|$).
+        '''</summary>
+        Friend ReadOnly Property UrlRegex() As String
+            Get
+                Return ResourceManager.GetString("UrlRegex", resourceCulture)
+            End Get
+        End Property
     End Module
 End Namespace
