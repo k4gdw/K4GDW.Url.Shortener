@@ -98,9 +98,6 @@ Namespace ViewModels
 				Return _LongUrl
 			End Get
 			Set(ByVal value As String)
-				If Not value.StartsWith("http") Then
-					value = String.Format("http://{0}", value)
-				End If
 				If Not _LongUrl = value Then
 					_LongUrl = value
 					NotifyOfPropertyChange(Function() LongUrl)
@@ -182,6 +179,7 @@ Namespace ViewModels
 				selectedService As String = "Bit.Ly",
 				sUrl As String = String.Empty
 			Try
+				PrependHttp(url)
 				Processing = True
 				If _UseBitly Then
 					selectedService = "Bit.Ly"
@@ -206,6 +204,16 @@ Namespace ViewModels
 			Finally
 				Processing = False
 			End Try
+		End Sub
+
+		''' <summary>
+		''' Prepends HTTP if the user didn't enter it
+		''' </summary>
+		''' <param name="url">The URL.</param>
+		Private Shared Sub PrependHttp(ByRef url As String)
+			If Not url.StartsWith("http") Then
+				url = String.Format("http://{0}", url)
+			End If
 		End Sub
 
 
