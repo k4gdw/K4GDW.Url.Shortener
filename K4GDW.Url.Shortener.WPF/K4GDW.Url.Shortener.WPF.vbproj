@@ -182,11 +182,6 @@
   <ItemGroup>
     <Resource Include="gdw16.ico" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="README.md">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
 </Project>

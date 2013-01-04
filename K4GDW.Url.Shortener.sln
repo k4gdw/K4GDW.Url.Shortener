@@ -10,6 +10,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionFiles", "SolutionFiles", "{C003BEDC-A748-48EE-97CB-3766D43B44D2}"
 	ProjectSection(SolutionItems) = preProject
 		SolutionFiles\gdw16.ico = SolutionFiles\gdw16.ico
+		README.md = README.md
 		SolutionFiles\SolutionInfo.vb = SolutionFiles\SolutionInfo.vb
 	EndProjectSection
 EndProject
