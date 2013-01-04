@@ -43,7 +43,7 @@
 		<ItemGroup>
 			<Binaries Include="$(SolutionDir)K4GDW.Url.Shortener.WPF\bin\Release\K4GDW.Url.Shortener.WPF.exe" />
 			<Binaries Include="$(SolutionDir)K4GDW.Url.Shortener.WPF\bin\Release\*.dll"/>
-			<Content Include="$(SolutionDir)K4GDW.Url.Shortener.WPF\bin\Release\*.txt" />
+			<Content Include="$(SolutionDir)\*.md" />
 			<Content Include="$(MSBuildProjectDirectory)\*.png" />
 		</ItemGroup>
 		<Message Text="Deploying..." />
