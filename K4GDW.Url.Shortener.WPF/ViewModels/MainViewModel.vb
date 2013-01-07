@@ -2,8 +2,8 @@
 Imports System.ComponentModel.Composition
 Imports System.Text.RegularExpressions
 Imports System.Net
+Imports Westwind.Utilities.Configuration
 Imports K4GDW.Infrastructure.Logging
-Imports System.Threading
 
 Namespace ViewModels
 
@@ -20,9 +20,28 @@ Namespace ViewModels
 
 		Private ReadOnly _logger As ILogger
 
+		Private _config As AppConfiguration
+
 		<ImportingConstructor()>
 		Public Sub New(logger As ILogger)
 			_logger = logger
+			_config = New AppConfiguration
+			Dim configProvider As New ConfigurationFileConfigurationProvider(Of AppConfiguration) With {.ConfigurationSection = "appSettings"}
+			_config.Initialize(configProvider)
+			Select Case _config.DefaultShortener
+				Case Shortener.BitLy
+					UseBitly = True
+					UseIsgd = False
+					UseTinyUrl = False
+				Case Shortener.IsGd
+					UseBitly = False
+					UseIsgd = True
+					UseTinyUrl = False
+				Case Shortener.TinyUrl
+					UseBitly = False
+					UseIsgd = False
+					UseTinyUrl = True
+			End Select
 		End Sub
 
 		''' <summary>
@@ -40,6 +59,8 @@ Namespace ViewModels
 			Set(ByVal value As Boolean)
 				If Not _UseTinyUrl = value Then
 					_UseTinyUrl = value
+					_config.DefaultShortener = Shortener.TinyUrl
+					_config.Write()
 					NotifyOfPropertyChange(Function() UseTinyUrl)
 				End If
 			End Set
@@ -60,6 +81,8 @@ Namespace ViewModels
 			Set(ByVal value As Boolean)
 				If Not _UseIsgd = value Then
 					_UseIsgd = value
+					_config.DefaultShortener = Shortener.IsGd
+					_config.Write()
 					NotifyOfPropertyChange(Function() UseIsgd)
 				End If
 			End Set
@@ -80,6 +103,8 @@ Namespace ViewModels
 			Set(ByVal value As Boolean)
 				If Not _UseBitly = value Then
 					_UseBitly = value
+					_config.DefaultShortener = Shortener.BitLy
+					_config.Write()
 					NotifyOfPropertyChange(Function() UseBitly)
 				End If
 			End Set
@@ -125,7 +150,7 @@ Namespace ViewModels
 				End If
 			End Set
 		End Property
-		
+
 		''' <summary>
 		''' Gets or sets the Processing property and raises the PropertyChanged event.
 		''' </summary>
@@ -146,7 +171,7 @@ Namespace ViewModels
 				End If
 			End Set
 		End Property
-		
+
 		''' <summary>
 		''' Gets a value indicating whether this instance can shorten longUrl.
 		''' </summary>
@@ -215,7 +240,6 @@ Namespace ViewModels
 				url = String.Format("http://{0}", url)
 			End If
 		End Sub
-
 
 		''' <summary>
 		''' Copies the URL to clipboard.
