@@ -23,11 +23,9 @@ Namespace ViewModels
 		Private _config As AppConfiguration
 
 		<ImportingConstructor()>
-		Public Sub New(logger As ILogger)
+		Public Sub New(logger As ILogger, config As AppConfiguration)
 			_logger = logger
-			_config = New AppConfiguration
-			Dim configProvider As New ConfigurationFileConfigurationProvider(Of AppConfiguration) With {.ConfigurationSection = "appSettings"}
-			_config.Initialize(configProvider)
+			_config = config
 			Select Case _config.DefaultShortener
 				Case Shortener.BitLy
 					UseBitly = True
@@ -59,12 +57,22 @@ Namespace ViewModels
 			Set(ByVal value As Boolean)
 				If Not _UseTinyUrl = value Then
 					_UseTinyUrl = value
-					_config.DefaultShortener = Shortener.TinyUrl
-					_config.Write()
+					If value Then
+						SaveDefaultShortener(Shortener.TinyUrl)
+					End If
 					NotifyOfPropertyChange(Function() UseTinyUrl)
 				End If
 			End Set
 		End Property
+
+		''' <summary>
+		''' Saves the default shortener.
+		''' </summary>
+		''' <param name="shortener">The shortener.</param>
+		Private Sub SaveDefaultShortener(shortener As Shortener)
+			_config.DefaultShortener = shortener
+			_config.Write()
+		End Sub
 
 		''' <summary>
 		''' Gets or sets the UseIsgd property and raises the PropertyChanged event.
@@ -81,8 +89,9 @@ Namespace ViewModels
 			Set(ByVal value As Boolean)
 				If Not _UseIsgd = value Then
 					_UseIsgd = value
-					_config.DefaultShortener = Shortener.IsGd
-					_config.Write()
+					If value Then
+						SaveDefaultShortener(Shortener.IsGd)
+					End If
 					NotifyOfPropertyChange(Function() UseIsgd)
 				End If
 			End Set
@@ -103,8 +112,9 @@ Namespace ViewModels
 			Set(ByVal value As Boolean)
 				If Not _UseBitly = value Then
 					_UseBitly = value
-					_config.DefaultShortener = Shortener.BitLy
-					_config.Write()
+					If value Then
+						SaveDefaultShortener(Shortener.BitLy)
+					End If
 					NotifyOfPropertyChange(Function() UseBitly)
 				End If
 			End Set

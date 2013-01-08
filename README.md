@@ -18,11 +18,12 @@ The shortened URL will be automatically copied into your windows clipboard.
 
 * 5.x -	Create a Windows 8 Store version that will run on Windows RT, Windows Phone 7.x/8, and Windows 8 Pro and be installed from the app store.
 
-* 4.1.x	- Provide a way for the user to change the default shortening engine.
+* 4.2.x - Change where the xml configuration file is stored so that it gets along with Windows security not liking to have editable files under Program Files.  This will be especially important once I create an installer for the app and create a Windows Store version.
 
 ##Change History:
+* 4.1.0 - The app will remember the last shortening service used, which is stored in an xml file, which is, in turn, stored in the same directory as the application executable.
 
-* \* 4.0.2 - Convert README.txt to README.md for nicer formating when I end up moving the project to github and move it out to the solution root folder so github will pick it up.  Edit the build script so that it knows where to find it.
+* 4.0.2 - Convert README.txt to README.md for nicer formating when I end up moving the project to github and move it out to the solution root folder so github will pick it up.  Edit the build script so that it knows where to find it.
 
 * 4.0.1	- Fixed a bug that caused "http://" to be prepended to the long url while the user is typing.  Now, it is only prepended when the user clicks the Get Shortened Url button.
 

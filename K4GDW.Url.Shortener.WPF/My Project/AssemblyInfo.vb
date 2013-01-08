@@ -1,8 +1,5 @@
-﻿Imports System
-Imports System.Reflection
+﻿Imports System.Reflection
 Imports System.Runtime.InteropServices
-Imports System.Globalization
-Imports System.Resources
 Imports System.Windows
 
 ' General Information about an assembly is controlled through the following 
@@ -12,10 +9,10 @@ Imports System.Windows
 ' Review the values of the assembly attributes
 
 <Assembly: AssemblyTitle("K4GDW.Url.Shortener.WPF")> 
-<Assembly: AssemblyDescription("")> 
-<Assembly: AssemblyCompany("Microsoft")> 
+<Assembly: AssemblyDescription("A simple URL shortening app.")> 
+<Assembly: AssemblyCompany("K4GDW Software")> 
 <Assembly: AssemblyProduct("K4GDW.Url.Shortener.WPF")> 
-<Assembly: AssemblyCopyright("Copyright © Microsoft 2012")> 
+<Assembly: AssemblyCopyright("Copyright © K4GDW 2012")> 
 <Assembly: AssemblyTrademark("")> 
 <Assembly: ComVisible(false)>
 
@@ -55,5 +52,5 @@ Imports System.Windows
 ' by using the '*' as shown below:
 ' <Assembly: AssemblyVersion("1.0.*")> 
 
-<Assembly: AssemblyVersion("4.0.2")> 
-<Assembly: AssemblyFileVersion("4.0.2")> 
+<Assembly: AssemblyVersion("4.1.0")> 
+<Assembly: AssemblyFileVersion("4.1.0")> 
