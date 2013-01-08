@@ -17,6 +17,28 @@
 		End Set
 	End Property
 
+	Private _BitLyKey As String
+
+	Public Property BitLyKey As String
+		Get
+			Return _BitLyKey
+		End Get
+		Set(ByVal value As String)
+			_BitLyKey = value
+		End Set
+	End Property
+
+	Private _BitLyLogin As String
+
+	Public Property BitLyLogin As String
+		Get
+			Return _BitLyLogin
+		End Get
+		Set(ByVal value As String)
+			_BitLyLogin = value
+		End Set
+	End Property
+
 
 End Class
 

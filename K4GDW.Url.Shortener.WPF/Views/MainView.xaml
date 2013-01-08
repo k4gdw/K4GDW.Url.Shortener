@@ -11,7 +11,7 @@
 		<TextBlock Name="ShortUrl" Margin="10,0,10,10"></TextBlock>
 		<Border BorderBrush="Black" CornerRadius="5,5,5,5" BorderThickness="2,2,2,2" Margin="10,0,10,10" VerticalAlignment="Center">
 			<StackPanel Orientation="Horizontal" Margin="10,0,10,10" HorizontalAlignment="Center" VerticalAlignment="Center">
-				<RadioButton Name="UseBitly" Content="Bit.Ly" Margin="0,0,10,0"></RadioButton>
+				<RadioButton Name="UseBitly" Content="Bit.Ly" Margin="0,0,10,0" IsEnabled="{Binding CanUseBitly}"></RadioButton>
 				<RadioButton Name="UseIsgd" Content="Is.gd" Margin="0,0,10,0"></RadioButton>
 				<RadioButton Name="UseTinyUrl" Content="TinyUrl"></RadioButton>
 			</StackPanel>

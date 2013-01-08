@@ -2,7 +2,6 @@
 Imports System.ComponentModel.Composition
 Imports System.Text.RegularExpressions
 Imports System.Net
-Imports Westwind.Utilities.Configuration
 Imports K4GDW.Infrastructure.Logging
 
 Namespace ViewModels
@@ -20,7 +19,7 @@ Namespace ViewModels
 
 		Private ReadOnly _logger As ILogger
 
-		Private _config As AppConfiguration
+		Private ReadOnly _config As AppConfiguration
 
 		<ImportingConstructor()>
 		Public Sub New(logger As ILogger, config As AppConfiguration)
@@ -182,6 +181,20 @@ Namespace ViewModels
 			End Set
 		End Property
 
+		Public ReadOnly Property CanUseBitly As Boolean
+			Get
+				Return BitLyCredsNotEmpty()
+			End Get
+		End Property
+
+
+		Private Function BitLyCredsNotEmpty() As Boolean
+			If Not String.IsNullOrEmpty(_config.BitLyLogin) AndAlso Not String.IsNullOrEmpty(_config.BitLyKey) Then
+				Return True
+			End If
+			Return False
+		End Function
+
 		''' <summary>
 		''' Gets a value indicating whether this instance can shorten longUrl.
 		''' </summary>
@@ -218,7 +231,7 @@ Namespace ViewModels
 				Processing = True
 				If _UseBitly Then
 					selectedService = "Bit.Ly"
-					sUrl = Await BitlyApi.ShortenUrlAsync(url)
+					sUrl = Await BitlyApi.ShortenUrlAsync(url, _config.BitLyKey, _config.BitLyLogin)
 				ElseIf _UseIsgd Then
 					selectedService = "Is.gd"
 					sUrl = Await IsGd.ShortenUrlAsync(url)

@@ -96,6 +96,7 @@
     </Compile>
     <Compile Include="AppConfiguration.vb" />
     <Compile Include="Helpers.vb" />
+    <Compile Include="ViewModels\BitlyCredentialsViewModel.vb" />
     <Compile Include="ViewModels\MainViewModel.vb" />
     <Compile Include="Application.xaml.vb">
       <DependentUpon>Application.xaml</DependentUpon>

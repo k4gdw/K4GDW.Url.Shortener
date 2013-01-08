@@ -16,8 +16,8 @@ Imports System.IO
 ''' 
 Public Class BitlyApi
 
-	Private Const apiKey As String = "R_59bbcc38b6cbca42297a62957de321b8 "
-	Private Const login As String = "k4gdw"
+	Private apiKey As String = "R_59bbcc38b6cbca42297a62957de321b8 "
+	Private login As String = "k4gdw"
 
 	''' <summary>
 	''' Gets the shortened url from Bit.ly asynchronously
@@ -30,12 +30,18 @@ Public Class BitlyApi
 	''' On:  3/18/2010 at 3:18 PM
 	''' </para>
 	''' </remarks>
-	Public Shared Async Function ShortenUrlAsync(ByVal longUrl As String) As Task(Of String)
+	Public Shared Async Function ShortenUrlAsync(ByVal longUrl As String, bitlyKey As String, bitlyLogin As String) As Task(Of String)
+		If String.IsNullOrEmpty(bitlyKey) Then
+			Throw New ArgumentNullException("bitlyKey")
+		End If
+		If String.IsNullOrEmpty(bitlyLogin) Then
+			Throw New ArgumentNullException("bitlyLogin")
+		End If
 		Try
 			Dim url = String.Format("http://api.bit.ly/shorten?format=xml&version=2.0.1&longUrl={0}&login={1}&apiKey={2}",
-			                        HttpUtility.UrlEncode(longUrl),
-			                        login,
-			                        apiKey)
+									HttpUtility.UrlEncode(longUrl),
+									bitlyLogin,
+									bitlyKey)
 			Dim req As WebRequest = WebRequest.Create(url)
 			Using rsp As WebResponse = Await req.GetResponseAsync()
 				Dim xdoc As XDocument
@@ -43,8 +49,8 @@ Public Class BitlyApi
 					xdoc = XDocument.Parse(rdr.ReadToEnd())
 				End Using
 				Dim x = (From xd In xdoc.Descendants("nodeKeyVal")
-					    Select New BitlyResults(xd.Descendants("hash").Value,
-					                            xd.Descendants("shortUrl").Value))
+						Select New BitlyResults(xd.Descendants("hash").Value,
+												xd.Descendants("shortUrl").Value))
 				Return x.FirstOrDefault.ShortUrl
 			End Using
 
