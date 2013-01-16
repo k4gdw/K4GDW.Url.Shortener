@@ -8,7 +8,7 @@
     <StackPanel Margin="0,0,0,10">
 		<TextBox Margin="10,10,10,10" Name="LongUrl" TextWrapping="Wrap" HorizontalScrollBarVisibility="Disabled"  Height="50" VerticalScrollBarVisibility="Auto"/>
 		<Button Name="ShortenUrl" Content="Get Shortened Url" Margin="10,0,10,10" />
-		<TextBlock Name="ShortUrl" Margin="10,0,10,10"></TextBlock>
+		<TextBox Name="ShortUrl" Margin="10,0,10,10" HorizontalScrollBarVisibility="Auto" IsEnabled="False"></TextBox>
 		<Border BorderBrush="Black" CornerRadius="5,5,5,5" BorderThickness="2,2,2,2" Margin="10,0,10,10" VerticalAlignment="Center">
 			<StackPanel Orientation="Horizontal" Margin="10,0,10,10" HorizontalAlignment="Center" VerticalAlignment="Center">
 				<RadioButton Name="UseBitly" Content="Bit.Ly" Margin="0,0,10,0"></RadioButton>
