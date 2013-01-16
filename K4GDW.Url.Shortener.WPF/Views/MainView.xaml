@@ -3,12 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             mc:Ignorable="d" Height="209" Width="309"
+             mc:Ignorable="d" Height="220" Width="310"
 			 Title="K4GDW Url Shortener" ResizeMode="NoResize" Icon="/K4GDW.Url.Shortener.WPF;component/gdw16.ico">
     <StackPanel Margin="0,0,0,10">
 		<TextBox Margin="10,10,10,10" Name="LongUrl" TextWrapping="Wrap" HorizontalScrollBarVisibility="Disabled"  Height="50" VerticalScrollBarVisibility="Auto"/>
-		<Button Name="ShortenUrl" Content="Get Shortened Url" Margin="10,0,10,10" />
-		<TextBox Name="ShortUrl" Margin="10,0,10,10" HorizontalScrollBarVisibility="Auto" IsEnabled="False"></TextBox>
 		<Border BorderBrush="Black" CornerRadius="5,5,5,5" BorderThickness="2,2,2,2" Margin="10,0,10,10" VerticalAlignment="Center">
 			<StackPanel Orientation="Horizontal" Margin="10,0,10,10" HorizontalAlignment="Center" VerticalAlignment="Center">
 				<RadioButton Name="UseBitly" Content="Bit.Ly" Margin="0,0,10,0"></RadioButton>
@@ -16,5 +14,7 @@
 				<RadioButton Name="UseTinyUrl" Content="TinyUrl"></RadioButton>
 			</StackPanel>
 		</Border>
+		<Button Name="ShortenUrl" Content="Get Shortened Url" Margin="10,0,10,10" />
+		<TextBox Name="ShortUrl" Margin="10,0,10,10" HorizontalScrollBarVisibility="Auto" IsEnabled="False"></TextBox>
 	</StackPanel>
 </Window>

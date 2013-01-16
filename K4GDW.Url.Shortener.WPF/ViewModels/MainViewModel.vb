@@ -2,7 +2,6 @@
 Imports System.ComponentModel.Composition
 Imports System.Text.RegularExpressions
 Imports System.Net
-Imports Westwind.Utilities.Configuration
 Imports K4GDW.Infrastructure.Logging
 
 Namespace ViewModels
