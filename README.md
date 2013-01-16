@@ -21,6 +21,8 @@ The shortened URL will be automatically copied into your windows clipboard.
 * 4.2.x - Change where the xml configuration file is stored so that it gets along with Windows security not liking to have editable files under Program Files.  This will be especially important once I create an installer for the app and create a Windows Store version.
 
 ##Change History:
+* 4.1.1 - I found a bug where the Is.Gd service didn't work unless the url was urlencoded.  Modified the is.gd library to make sure the url was properly encoded.
+
 * 4.1.0 - The app will remember the last shortening service used, which is stored in an xml file, which is, in turn, stored in the same directory as the application executable.
 
 * 4.0.2 - Convert README.txt to README.md for nicer formating when I end up moving the project to github and move it out to the solution root folder so github will pick it up.  Edit the build script so that it knows where to find it.

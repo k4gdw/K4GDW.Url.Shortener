@@ -90,8 +90,8 @@ Module Helpers
     Public Sub LogItem(ByRef item As ILoggable)
         Dim logger As Logger = LogManager.GetCurrentClassLogger()
         logger.Info(item.Info())
-    End Sub
-    
+	End Sub
+	
     ''' <summary>
     ''' To require that an object provides a params property.
     ''' </summary>
