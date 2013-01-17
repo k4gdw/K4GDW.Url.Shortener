@@ -42,20 +42,20 @@
 			DependsOnTargets="Clean;Build">
 		<ItemGroup>
 			<Binaries Include="$(SolutionDir)K4GDW.Url.Shortener.WPF\bin\Release\K4GDW.Url.Shortener.WPF.exe" />
-			<Binaries Include="$(SolutionDir)K4GDW.Url.Shortener.WPF\bin\Release\*.dll"/>
+			<Binaries Include="$(SolutionDir)K4GDW.Url.Shortener.WPF\bin\Release\*.dll" />
 			<Content Include="$(SolutionDir)\*.md" />
 			<Content Include="$(MSBuildProjectDirectory)\*.png" />
 		</ItemGroup>
 		<Message Text="Deploying..." />
 		<MakeDir Directories="$(SolutionDir)Deploy;$(SolutionDir)Deploy\temp" />
-		<ILmerge InputAssemblies="@(Binaries)"
+		<!--<ILmerge InputAssemblies="@(MergableBinaries)"
 				 OutputFile="$(SolutionDir)Deploy\temp\K4GDW.Url.Shortener.WPF.exe"
 				 LogFile="$(SolutionDir)Deploy\ILMerge.log"
-				 TargetPlatformVersion="v4"/>
+				 TargetPlatformVersion="v4"/>-->
 		<Copy SourceFiles="@(Content)"
 			  DestinationFolder="$(SolutionDir)Deploy\temp"/>
-		<!--<Copy SourceFiles="@(Binaries)"
-			  DestinationFolder="$(SolutionDir)Deploy\temp"/>-->
+		<Copy SourceFiles="@(Binaries)"
+			  DestinationFolder="$(SolutionDir)Deploy\temp"/>
 		<Exec Command="7za.exe a $(SolutionDir)\Deploy\K4GDW.Url.Shortener.zip $(SolutionDir)Deploy\temp\*.*" />
 		<Exec Command="md5.exe -n -o$(SolutionDir)\Deploy\md5.txt $(SolutionDir)\Deploy\K4GDW.Url.Shortener.zip" />
 	</Target>
