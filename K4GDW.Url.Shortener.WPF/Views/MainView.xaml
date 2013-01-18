@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" Height="220" Width="310"
-			 Title="K4GDW Url Shortener" ResizeMode="NoResize" Icon="/K4GDW.Url.Shortener.WPF;component/gdw16.ico">
+			 Title="{Binding AppTitle, Mode=OneWay}" ResizeMode="NoResize" Icon="/K4GDW.Url.Shortener.WPF;component/gdw16.ico">
     <StackPanel Margin="0,0,0,10">
 		<TextBox Margin="10,10,10,10" Name="LongUrl" TextWrapping="Wrap" HorizontalScrollBarVisibility="Disabled"  Height="50" VerticalScrollBarVisibility="Auto"/>
 		<Border BorderBrush="Black" CornerRadius="5,5,5,5" BorderThickness="2,2,2,2" Margin="10,0,10,10" VerticalAlignment="Center">

@@ -1,12 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003"
-		 DefaultTargets="Build">
+		 DefaultTargets="Build"
+		 ToolsVersion="4.0">
 	<Import Project="$(MSBuildExtensionsPath)\MSBuildCommunityTasks\MSBuild.Community.Tasks.Targets" />
-	<UsingTask TaskName="ILMerge.MSBuild.Tasks.ILMerge"
-			   AssemblyFile="ILMerge.MSBuild.Tasks.ILMerge"/>
+	<!--<UsingTask TaskName="ILMerge.MSBuild.Tasks.ILMerge"
+			   AssemblyFile="ILMerge.MSBuild.Tasks.ILMerge"/>-->
     <PropertyGroup>
+		<Configuration Condition=" '$(Configuration)' == '' ">Release</Configuration>
 	    <SolutionDir>$(MSBuildProjectDirectory)\..\</SolutionDir>
+		<Major>4</Major>
+		<Minor>2</Minor>
+		<Revision>0</Revision>
+		<Build Condition=" '$(BuildNo)' == '' ">.$(BUILD_NUMBER)</Build>
+		<Build Condition=" '$(BuildNo)' != '' ">.$(BuildNo)</Build>
   	</PropertyGroup>
+
+	<Target Name="Version">
+		<Message Text="Version: $(Major).$(Minor).$(Revision).$(Build)"/>
+		<AssemblyInfo CodeLanguage="VB"
+					  OutputFile="$(SolutionDir)\K4GDW.Url.Shortener.WPF\My Project\AssemblyInfo.vb"
+					  AssemblyCompany="K4GDW Software"
+					  AssemblyCopyright="Copyright © K4GDW 2011,2012,2013"
+					  AssemblyTrademark="K4GDW"
+					  AssemblyVersion="$(Major).$(Minor)"
+					  AssemblyFileVersion="$(Major).$(Minor).$(Revision)$(Build)"
+					  AssemblyInformationalVersion="$(Major).$(Minor).$(Revision)$(Build)"
+					  Condition=" '$(Build)' != '' " />
+	</Target>
+
+	<Target Name="BackupAssyInfo">
+		<RemoveDir Directories="$(SolutionDir)temp"
+				   ContinueOnError="true" />
+		<MakeDir Directories="$(SolutionDir)temp"
+				 Condition="!Exists('$(BaseDir)temp')" />
+		<Copy SourceFiles="$(SolutionDir)\K4GDW.Url.Shortener.WPF\My Project\AssemblyInfo.vb"
+			  DestinationFolder ="$(SolutionDir)temp" />
+	</Target>
+
+	<Target Name="RestoreAssyInfo">
+		<Copy SourceFiles="$(SolutionDir)temp\AssemblyInfo.vb"
+			  DestinationFolder ="$(SolutionDir)\K4GDW.Url.Shortener.WPF\My Project\"
+			  Condition="Exists('$(SolutionDir)temp\AssemblyInfo.vb')" />
+		<RemoveDir Directories="$(SolutionDir)temp"
+				   ContinueOnError="true" />
+	</Target>
+
 
 	<Target Name="Clean">
 		<ItemGroup>
@@ -25,24 +63,29 @@
 			<Projects Include="$(SolutionDir)isgdLib\isgdLib.vbproj" />
 			<Projects Include="$(SolutionDir)TinyURLLib\TinyURLLib.vbproj" />
 		</ItemGroup>
-		<Message Text="Release Building ..." />
+		<Message Text="$(Configuration) Building ..." />
 		<MSBuild Projects="@(Projects)"
 				 Targets="Build"
-				 Properties="Configuration=Release"/>
+				 Properties="Configuration=$(Configuration)"/>
 	</Target>
 	<Target Name="Build"
 			DependsOnTargets="BuildCore">
-		<Message Text="Release Building ..." />
+		<CallTarget Targets="BackupAssyInfo"
+					Condition=" '$(BUILD_NUMBER)' == '' AND $(Build) != '' "/>
+		<CallTarget Targets="Version" />
+		<Message Text="$(Configuration) Building ..." />
 		<MSBuild Projects="$(SolutionDir)K4GDW.Url.Shortener.WPF\K4GDW.Url.Shortener.WPF.vbproj"
 				 Targets="Build"
-				 Properties="Configuration=Release"/>
+				 Properties="Configuration=$(Configuration)"/>
+		<CallTarget Targets="RestoreAssyInfo"
+					Condition=" '$(BUILD_NUMBER)' == '' AND $(Build) != '' "/>
 	</Target>
 
 	<Target Name="Deploy"
 			DependsOnTargets="Clean;Build">
 		<ItemGroup>
-			<Binaries Include="$(SolutionDir)K4GDW.Url.Shortener.WPF\bin\Release\K4GDW.Url.Shortener.WPF.exe" />
-			<Binaries Include="$(SolutionDir)K4GDW.Url.Shortener.WPF\bin\Release\*.dll" />
+			<Binaries Include="$(SolutionDir)K4GDW.Url.Shortener.WPF\bin\$(Configuration)\K4GDW.Url.Shortener.WPF.exe" />
+			<Binaries Include="$(SolutionDir)K4GDW.Url.Shortener.WPF\bin\$(Configuration)\*.dll" />
 			<Content Include="$(SolutionDir)\*.md" />
 			<Content Include="$(MSBuildProjectDirectory)\*.png" />
 		</ItemGroup>

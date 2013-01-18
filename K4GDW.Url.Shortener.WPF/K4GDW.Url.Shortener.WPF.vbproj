@@ -93,9 +93,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="AppBootStrapper.vb">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Compile>
+    <Compile Include="AppBootStrapper.vb" />
     <Compile Include="AppConfiguration.vb" />
     <Compile Include="Helpers.vb" />
     <Compile Include="ViewModels\BitlyCredentialsViewModel.vb" />

@@ -2,11 +2,11 @@
 	Inherits Westwind.Utilities.Configuration.AppConfiguration
 
 	Public Sub New()
-
+		_DefaultShortener = Shortener.IsGd
 	End Sub
 
 
-	Private _DefaultShortener As Shortener = Shortener.BitLy
+	Private _DefaultShortener As Shortener
 
 	Public Property DefaultShortener As Shortener
 		Get
@@ -38,8 +38,7 @@
 			_BitLyLogin = value
 		End Set
 	End Property
-
-
+	
 End Class
 
 Public Enum Shortener As Integer

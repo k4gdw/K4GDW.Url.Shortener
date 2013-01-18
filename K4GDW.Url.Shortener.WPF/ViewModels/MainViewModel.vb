@@ -25,6 +25,7 @@ Namespace ViewModels
 		Public Sub New(logger As ILogger, config As AppConfiguration)
 			_logger = logger
 			_config = config
+			AppTitle = GetTitle()
 			Select Case _config.DefaultShortener
 				Case Shortener.BitLy
 					UseBitly = True
@@ -40,6 +41,33 @@ Namespace ViewModels
 					UseTinyUrl = True
 			End Select
 		End Sub
+
+		Private Function GetTitle() As String
+			Return String.Format("K4GDW Url Shortener - {0}",
+								 Reflection.Assembly.GetExecutingAssembly().GetName().Version)
+		End Function
+
+		Private _AppTitle As String
+
+		''' <summary>
+		''' Gets or sets the AppTitle property and raises the PropertyChanged event.
+		''' </summary>
+		''' <remarks>
+		''' <para>
+		''' This template works with the Caliburn.Micro MVVM framework.
+		''' </para>
+		''' </remarks>
+		Public Property AppTitle As String
+			Get
+				Return _AppTitle
+			End Get
+			Private Set(ByVal value As String)
+				If Not _AppTitle = value Then
+					_AppTitle = value
+					NotifyOfPropertyChange(Function() AppTitle)
+				End If
+			End Set
+		End Property
 
 		''' <summary>
 		''' Gets or sets the UseTinyUrl property and raises the PropertyChanged event.
