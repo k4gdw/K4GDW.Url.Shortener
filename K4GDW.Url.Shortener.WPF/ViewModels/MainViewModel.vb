@@ -2,6 +2,7 @@
 Imports System.ComponentModel.Composition
 Imports System.Text.RegularExpressions
 Imports System.Net
+Imports System.Dynamic
 Imports K4GDW.Infrastructure.Logging
 
 Namespace ViewModels
@@ -21,11 +22,18 @@ Namespace ViewModels
 
 		Private ReadOnly _config As AppConfiguration
 
+		Private ReadOnly _windowManager As IWindowManager
+
+		Private ReadOnly _events As IEventAggregator
+
 		<ImportingConstructor()>
-		Public Sub New(logger As ILogger, config As AppConfiguration)
+		Public Sub New(logger As ILogger, config As AppConfiguration, windowManager As IWindowManager, events As IEventAggregator)
 			_logger = logger
 			_config = config
 			AppTitle = GetTitle()
+			_windowManager = windowManager
+			_events = events
+			_events.Subscribe(Me)
 			Select Case _config.DefaultShortener
 				Case Shortener.BitLy
 					UseBitly = True
@@ -209,6 +217,11 @@ Namespace ViewModels
 			End Set
 		End Property
 
+		''' <summary>
+		''' Gets a value indicating whether this instance can use bitly.
+		''' </summary>
+		''' <value><c>true</c> if this instance can use bitly; otherwise, <c>false</c>.</value>
+		''' <remarks></remarks>
 		Public ReadOnly Property CanUseBitly As Boolean
 			Get
 				Return BitLyCredsNotEmpty()
@@ -216,6 +229,10 @@ Namespace ViewModels
 		End Property
 
 
+		''' <summary>
+		''' Bits the ly creds not empty.
+		''' </summary>
+		''' <returns><c>true</c> if XXXX, <c>false</c> otherwise</returns>
 		Private Function BitLyCredsNotEmpty() As Boolean
 			If Not String.IsNullOrEmpty(_config.BitLyLogin) AndAlso Not String.IsNullOrEmpty(_config.BitLyKey) Then
 				Return True
@@ -297,7 +314,7 @@ Namespace ViewModels
 		''' </summary>
 		''' <param name="url">The URL.</param>
 		''' <param name="maxTries">The max tries.</param>
-		Private Sub CopyUrlToClipboard(url As String, Optional maxTries As Int16 = 3)
+		Public Sub CopyUrlToClipboard(url As String, Optional maxTries As Int16 = 3)
 			Dim success As Boolean = False
 			Dim tries As Int16 = 0
 			While Not success AndAlso tries < maxTries
@@ -310,6 +327,20 @@ Namespace ViewModels
 					success = False
 				End Try
 			End While
+		End Sub
+
+		''' <summary>
+		''' Closes the app.
+		''' </summary>
+		Public Sub CloseApp()
+			Application.Current.Shutdown()
+		End Sub
+
+		Public Sub ShowPreferences()
+			Dim settings As Object = New ExpandoObject
+			settings.WindowStartupLocation = WindowStartupLocation.CenterOwner
+
+			_windowManager.ShowDialog(New PreferencesViewModel(_logger, _config, _events), Nothing, settings)
 		End Sub
 
 	End Class

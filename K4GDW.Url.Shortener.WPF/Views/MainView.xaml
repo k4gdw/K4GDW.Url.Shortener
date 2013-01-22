@@ -1,11 +1,39 @@
 ﻿<Window x:Class="Views.MainView"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             mc:Ignorable="d" Height="220" Width="310"
-			 Title="{Binding AppTitle, Mode=OneWay}" ResizeMode="NoResize" Icon="/K4GDW.Url.Shortener.WPF;component/gdw16.ico">
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        mc:Ignorable="d" Height="230" Width="310"
+		Title="{Binding AppTitle, Mode=OneWay}" 
+		ResizeMode="NoResize" 
+		Icon="/K4GDW.Url.Shortener.WPF;component/gdw16.ico">
     <StackPanel Margin="0,0,0,10">
+		<Menu IsMainMenu="True">
+			<MenuItem Header="_File">
+				<MenuItem Header="E_xit" Name="CloseApp">
+					<MenuItem.Icon>
+						<Image Source="Images\Close.ico"></Image>
+					</MenuItem.Icon>
+				</MenuItem>
+			</MenuItem>
+			<MenuItem Header="_Edit">
+				<MenuItem Header="_Preferences" Name="ShowPreferences">
+					<MenuItem.Icon>
+						<Image Source="Images\126_Edit.ico"></Image>
+					</MenuItem.Icon>
+				</MenuItem>
+			</MenuItem>
+			<MenuItem Header="_View">
+				<MenuItem Header="_Clear">
+					<MenuItem.Icon>
+						<Image Source="Images\delete.ico"></Image>
+					</MenuItem.Icon>
+				</MenuItem>
+			</MenuItem>
+			<MenuItem Header="_Help">
+				<MenuItem Header="_About"></MenuItem>
+			</MenuItem>
+		</Menu>
 		<TextBox Margin="10,10,10,10" Name="LongUrl" TextWrapping="Wrap" HorizontalScrollBarVisibility="Disabled"  Height="50" VerticalScrollBarVisibility="Auto"/>
 		<Border BorderBrush="Black" CornerRadius="5,5,5,5" BorderThickness="2,2,2,2" Margin="10,0,10,10" VerticalAlignment="Center">
 			<StackPanel Orientation="Horizontal" Margin="10,0,10,10" HorizontalAlignment="Center" VerticalAlignment="Center">

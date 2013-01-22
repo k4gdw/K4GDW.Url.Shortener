@@ -15,7 +15,7 @@
     <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x86</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <DefineDebug>true</DefineDebug>
@@ -96,7 +96,7 @@
     <Compile Include="AppBootStrapper.vb" />
     <Compile Include="AppConfiguration.vb" />
     <Compile Include="Helpers.vb" />
-    <Compile Include="ViewModels\BitlyCredentialsViewModel.vb" />
+    <Compile Include="ViewModels\PreferencesViewModel.vb" />
     <Compile Include="ViewModels\MainViewModel.vb" />
     <Compile Include="Application.xaml.vb">
       <DependentUpon>Application.xaml</DependentUpon>
@@ -104,6 +104,9 @@
     </Compile>
     <Compile Include="Views\MainView.xaml.vb">
       <DependentUpon>MainView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\PreferencesView.xaml.vb">
+      <DependentUpon>PreferencesView.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
@@ -184,9 +187,20 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\PreferencesView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="gdw16.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\Images\Close.ico" />
+    <Resource Include="Views\Images\delete.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\Images\126_Edit.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
   <Import Project="$(SolutionDir)\.nuget\nuget.targets" />
