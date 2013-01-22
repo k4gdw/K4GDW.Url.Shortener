@@ -16,9 +16,6 @@ Imports System.IO
 ''' 
 Public Class BitlyApi
 
-	Private apiKey As String = "R_59bbcc38b6cbca42297a62957de321b8 "
-	Private login As String = "k4gdw"
-
 	''' <summary>
 	''' Gets the shortened url from Bit.ly asynchronously
 	''' </summary>
