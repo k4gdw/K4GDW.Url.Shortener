@@ -118,19 +118,19 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="AboutText" xml:space="preserve">
-    <value>The K4GDW Url Shortener is a simple utility that allows the user to shorten long web addresses without having to open a web browser, navigate to the shortening service and enter the address to be shortened.  By default, it supports the services provided by TinyUrl.com and Is.Gd.  It can also support Bit.Ly if you have registered a Bit.Ly account and been given a login and api key.</value>
+    <value>El acortador de URL K4GDW es una sencilla utilidad que permite al usuario acortar direcciones largas web sin tener que abrir un navegador web, vaya al servicio de acortamiento y escriba la dirección a acortarse. De forma predeterminada, es compatible con los servicios prestados por TinyUrl.com y Is.Gd. También puede soportar Bit.Ly si se ha registrado una cuenta Bit.Ly y ha dado un nombre de usuario y clave de API.</value>
   </data>
   <data name="AppName" xml:space="preserve">
-    <value>K4GDW Url Shortener</value>
+    <value>Url Shortener K4GDW</value>
   </data>
   <data name="ClipboardFailure" xml:space="preserve">
-    <value>Unable to insert shortened url, "{0}" into clipboard.</value>
+    <value>No se puede insertar url acortada, "{0}" en el portapapeles.</value>
   </data>
-  <data name="NoShortenerSelectedMessage" xml:space="preserve">
-    <value>A shortening service must be selected.  Something really strange has happened to unselect all of the supported services.  Select one and try again.  If this message comes up again, send an email to bjohns@greendragonweb.com.</value>
+  <data name="NoShortenerSelected" xml:space="preserve">
+    <value>Un servicio de acortamiento se debe seleccionar. Algo muy extraño le ha pasado a anular la selección de todos los servicios soportados. Seleccione uno y vuelva a intentarlo. Si este mensaje aparece de nuevo, envíe un correo electrónico a bjohns@greendragonweb.com.</value>
   </data>
   <data name="ServiceConnectionError" xml:space="preserve">
-    <value>There was an error connecting to the {0} service.  Try one of the others.</value>
+    <value>Hubo un error al conectar con el servicio {0}. Pruebe uno de los otros.</value>
   </data>
   <data name="UrlRegex" xml:space="preserve">
     <value>^(https?://)?([\d\w-.]+?\.(a[cdefgilmnoqrstuwz]|b[abdefghijmnorstvwyz]|c[acdfghiklmnoruvxyz]|d[ejkmnoz]|e[ceghrst]|f[ijkmnor]|g[abdefghilmnpqrstuwy]|h[kmnrtu]|i[delmnoqrst]|j[emop]|k[eghimnprwyz]|l[abcikrstuvy]|m[acdghklmnopqrstuvwxyz]|n[acefgilopruz]|om|p[aefghklmnrstwy]|qa|r[eouw]|s[abcdeghijklmnortuvyz]|t[cdfghjkmnoprtvwz]|u[augkmsyz]|v[aceginu]|w[fs]|y[etu]|z[amw]|aero|arpa|biz|com|coop|edu|info|int|gov|mil|museum|name|net|org|pro)(\b|\W(?&lt;!&amp;|=)(?!\.\s|\.{3}).*?))(\s|$)</value>

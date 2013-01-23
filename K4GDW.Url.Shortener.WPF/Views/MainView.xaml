@@ -31,7 +31,7 @@
 				</MenuItem>
 			</MenuItem>
 			<MenuItem Header="_Help">
-				<MenuItem Header="_About"></MenuItem>
+				<MenuItem Header="_About" Name="ShowAbout"></MenuItem>
 			</MenuItem>
 		</Menu>
 		<TextBox Margin="10,10,10,10" Name="LongUrl" TextWrapping="Wrap" HorizontalScrollBarVisibility="Disabled"  Height="50" VerticalScrollBarVisibility="Auto"/>

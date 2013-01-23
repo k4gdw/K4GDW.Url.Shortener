@@ -26,7 +26,7 @@ Namespace My.Resources
      Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
      Global.System.Runtime.CompilerServices.CompilerGeneratedAttribute(),  _
      Global.Microsoft.VisualBasic.HideModuleNameAttribute()>  _
-    Friend Module Resources
+    Public Module Resources
         
         Private resourceMan As Global.System.Resources.ResourceManager
         
@@ -36,7 +36,7 @@ Namespace My.Resources
         '''  Returns the cached ResourceManager instance used by this class.
         '''</summary>
         <Global.System.ComponentModel.EditorBrowsableAttribute(Global.System.ComponentModel.EditorBrowsableState.Advanced)>  _
-        Friend ReadOnly Property ResourceManager() As Global.System.Resources.ResourceManager
+        Public ReadOnly Property ResourceManager() As Global.System.Resources.ResourceManager
             Get
                 If Object.ReferenceEquals(resourceMan, Nothing) Then
                     Dim temp As Global.System.Resources.ResourceManager = New Global.System.Resources.ResourceManager("K4GDW.Url.Shortener.Resources", GetType(Resources).Assembly)
@@ -51,7 +51,7 @@ Namespace My.Resources
         '''  resource lookups using this strongly typed resource class.
         '''</summary>
         <Global.System.ComponentModel.EditorBrowsableAttribute(Global.System.ComponentModel.EditorBrowsableState.Advanced)>  _
-        Friend Property Culture() As Global.System.Globalization.CultureInfo
+        Public Property Culture() As Global.System.Globalization.CultureInfo
             Get
                 Return resourceCulture
             End Get
@@ -61,9 +61,18 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  Looks up a localized string similar to The K4GDW Url Shortener is a simple utility that allows the user to shorten long web addresses without having to open a web browser, navigate to the shortening service and enter the address to be shortened.  By default, it supports the services provided by TinyUrl.com and Is.Gd.  It can also support Bit.Ly if you have registered a Bit.Ly account and been given a login and api key..
+        '''</summary>
+        Public ReadOnly Property AboutText() As String
+            Get
+                Return ResourceManager.GetString("AboutText", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  Looks up a localized string similar to K4GDW Url Shortener.
         '''</summary>
-        Friend ReadOnly Property AppName() As String
+        Public ReadOnly Property AppName() As String
             Get
                 Return ResourceManager.GetString("AppName", resourceCulture)
             End Get
@@ -72,7 +81,7 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized string similar to Unable to insert shortened url, &quot;{0}&quot; into clipboard..
         '''</summary>
-        Friend ReadOnly Property ClipboardFailure() As String
+        Public ReadOnly Property ClipboardFailure() As String
             Get
                 Return ResourceManager.GetString("ClipboardFailure", resourceCulture)
             End Get
@@ -81,7 +90,7 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized string similar to A shortening service must be selected.  Something really strange has happened to unselect all of the supported services.  Select one and try again.  If this message comes up again, send an email to bjohns@greendragonweb.com..
         '''</summary>
-        Friend ReadOnly Property NoShortenerSelectedMessage() As String
+        Public ReadOnly Property NoShortenerSelectedMessage() As String
             Get
                 Return ResourceManager.GetString("NoShortenerSelectedMessage", resourceCulture)
             End Get
@@ -90,7 +99,7 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized string similar to There was an error connecting to the {0} service.  Try one of the others..
         '''</summary>
-        Friend ReadOnly Property ServiceConnectionError() As String
+        Public ReadOnly Property ServiceConnectionError() As String
             Get
                 Return ResourceManager.GetString("ServiceConnectionError", resourceCulture)
             End Get
@@ -99,7 +108,7 @@ Namespace My.Resources
         '''<summary>
         '''  Looks up a localized string similar to ^(https?://)?([\d\w-.]+?\.(a[cdefgilmnoqrstuwz]|b[abdefghijmnorstvwyz]|c[acdfghiklmnoruvxyz]|d[ejkmnoz]|e[ceghrst]|f[ijkmnor]|g[abdefghilmnpqrstuwy]|h[kmnrtu]|i[delmnoqrst]|j[emop]|k[eghimnprwyz]|l[abcikrstuvy]|m[acdghklmnopqrstuvwxyz]|n[acefgilopruz]|om|p[aefghklmnrstwy]|qa|r[eouw]|s[abcdeghijklmnortuvyz]|t[cdfghjkmnoprtvwz]|u[augkmsyz]|v[aceginu]|w[fs]|y[etu]|z[amw]|aero|arpa|biz|com|coop|edu|info|int|gov|mil|museum|name|net|org|pro)(\b|\W(?&lt;!&amp;|=)(?!\.\s|\.{3}).*?))(\s|$).
         '''</summary>
-        Friend ReadOnly Property UrlRegex() As String
+        Public ReadOnly Property UrlRegex() As String
             Get
                 Return ResourceManager.GetString("UrlRegex", resourceCulture)
             End Get

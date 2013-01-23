@@ -343,9 +343,16 @@ Namespace ViewModels
 
 		Public Sub ShowPreferences()
 			Dim settings As Object = New ExpandoObject
-			settings.WindowStartupLocation = WindowStartupLocation.CenterOwner
+			settings.WindowStartupLocation = WindowStartupLocation.CenterScreen
 
 			_windowManager.ShowDialog(New PreferencesViewModel(_logger, _config, _events), Nothing, settings)
+		End Sub
+
+		Public Sub ShowAbout()
+			Dim settings As Object = New ExpandoObject
+			settings.WindowStartupLocation = WindowStartupLocation.CenterScreen
+
+			_windowManager.ShowDialog(New AboutViewModel(_events), Nothing, settings)
 		End Sub
 
 	End Class
