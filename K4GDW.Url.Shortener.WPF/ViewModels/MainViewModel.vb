@@ -4,6 +4,8 @@ Imports System.Text.RegularExpressions
 Imports System.Net
 Imports System.Dynamic
 Imports K4GDW.Infrastructure.Logging
+Imports System.Reflection
+
 
 Namespace ViewModels
 
@@ -50,9 +52,12 @@ Namespace ViewModels
 			End Select
 		End Sub
 
+		''' <summary>
+		''' Gets the title.
+		''' </summary>
+		''' <returns>System.String.</returns>
 		Private Function GetTitle() As String
-			Return String.Format("K4GDW Url Shortener - {0}",
-								 Reflection.Assembly.GetExecutingAssembly().GetName().Version)
+			Return String.Format("K4GDW Url Shortener - {0}", FileVersionInfo.GetVersionInfo("K4GDW.Url.Shortener.WPF.exe").FileVersion)
 		End Function
 
 		Private _AppTitle As String
