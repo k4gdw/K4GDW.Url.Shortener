@@ -24,7 +24,7 @@
 				</MenuItem>
 			</MenuItem>
 			<MenuItem Header="_View">
-				<MenuItem Header="_Clear">
+				<MenuItem Header="_Clear" Name="Clear">
 					<MenuItem.Icon>
 						<Image Source="Images\delete.ico"></Image>
 					</MenuItem.Icon>

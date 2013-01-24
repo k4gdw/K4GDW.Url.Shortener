@@ -341,6 +341,14 @@ Namespace ViewModels
 			Application.Current.Shutdown()
 		End Sub
 
+		Public Sub Clear()
+			ShortUrl = String.Empty
+			LongUrl = String.Empty
+		End Sub
+
+		''' <summary>
+		''' Shows the preferences screen.
+		''' </summary>
 		Public Sub ShowPreferences()
 			Dim settings As Object = New ExpandoObject
 			settings.WindowStartupLocation = WindowStartupLocation.CenterScreen
@@ -348,6 +356,9 @@ Namespace ViewModels
 			_windowManager.ShowDialog(New PreferencesViewModel(_logger, _config, _events), Nothing, settings)
 		End Sub
 
+		''' <summary>
+		''' Shows the about screen.
+		''' </summary>
 		Public Sub ShowAbout()
 			Dim settings As Object = New ExpandoObject
 			settings.WindowStartupLocation = WindowStartupLocation.CenterScreen
