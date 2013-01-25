@@ -1,6 +1,8 @@
 ﻿Imports Caliburn.Micro
 Imports System.ComponentModel.Composition
 Imports K4GDW.Infrastructure.Logging
+Imports K4GDW.Url.Shortener.Messages
+
 
 Namespace ViewModels
 
@@ -8,7 +10,7 @@ Namespace ViewModels
 	Public Class PreferencesViewModel
 		Inherits PropertyChangedBase
 		Implements IViewAware
-		
+
 		Private ReadOnly _logger As ILogger
 		Private ReadOnly _config As AppConfiguration
 		Private _events As IEventAggregator
@@ -95,6 +97,7 @@ Namespace ViewModels
 			_config.BitLyKey = BitLyApiKey
 			_config.BitLyLogin = BitLyApiLogin
 			_config.Write()
+			_events.Publish(New PreferencesSavedEvent)
 			dialogWindow.Close()
 		End Sub
 

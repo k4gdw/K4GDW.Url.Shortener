@@ -5,6 +5,7 @@ Imports System.Net
 Imports System.Dynamic
 Imports K4GDW.Infrastructure.Logging
 Imports System.Reflection
+Imports K4GDW.Url.Shortener.Messages
 
 
 Namespace ViewModels
@@ -12,7 +13,8 @@ Namespace ViewModels
 	<Export(GetType(MainViewModel))>
 	Public Class MainViewModel
 		Inherits PropertyChangedBase
-
+		Implements IHandle(Of PreferencesSavedEvent)
+		
 		Private _LongUrl As String
 		Private _ShortUrl As String
 		Private _UseBitly As Boolean = True
@@ -364,6 +366,11 @@ Namespace ViewModels
 			settings.WindowStartupLocation = WindowStartupLocation.CenterScreen
 
 			_windowManager.ShowDialog(New AboutViewModel(_events), Nothing, settings)
+		End Sub
+
+		Public Sub Handle(message As PreferencesSavedEvent) Implements IHandle(Of PreferencesSavedEvent).Handle
+			_config.Read()
+			NotifyOfPropertyChange(Function() CanUseBitly)
 		End Sub
 
 	End Class

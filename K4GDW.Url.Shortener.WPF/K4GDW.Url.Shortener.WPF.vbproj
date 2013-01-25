@@ -96,6 +96,7 @@
     <Compile Include="AppBootStrapper.vb" />
     <Compile Include="AppConfiguration.vb" />
     <Compile Include="Helpers.vb" />
+    <Compile Include="Messages\PreferencesSavedEvent.vb" />
     <Compile Include="ViewModels\AboutViewModel.vb" />
     <Compile Include="ViewModels\PreferencesViewModel.vb" />
     <Compile Include="ViewModels\MainViewModel.vb" />
@@ -184,9 +185,7 @@
       <Name>TinyURLLib</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Messages\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <Page Include="Views\AboutView.xaml">
       <SubType>Designer</SubType>
