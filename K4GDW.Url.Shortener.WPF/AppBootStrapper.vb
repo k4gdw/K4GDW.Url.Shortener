@@ -1,5 +1,6 @@
 ﻿Imports System.ComponentModel.Composition
 Imports System.ComponentModel.Composition.Hosting
+Imports System.IO
 Imports Westwind.Utilities.Configuration
 Imports K4GDW.Url.Shortener.ViewModels
 Imports Caliburn.Micro
@@ -29,10 +30,13 @@ Public Class AppBootStrapper
 	End Sub
 
 	Private Function Config() As AppConfiguration
-
+		Dim configFolder As String = String.Format("{0}/K4GDW Software/Url.Shortener", Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData))
+		If Not Directory.Exists(configFolder) Then
+			Directory.CreateDirectory(configFolder)
+		End If
 		Dim configProvider As New ConfigurationFileConfigurationProvider(Of AppConfiguration) With {
 				.ConfigurationSection = "Settings",
-				.ConfigurationFile = String.Format("{0}\UrlShortenerConfig.xml", Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)),
+				.ConfigurationFile = String.Format("{0}\UrlShortenerConfig.xml", configFolder),
 				.PropertiesToEncrypt = "BitLyKey,BitLyLogin",
 				.EncryptionKey = "8cA_5yT&"}
 		Dim cnf As New AppConfiguration

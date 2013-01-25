@@ -7,6 +7,20 @@
 		Title="{Binding AppTitle, Mode=OneWay}" 
 		ResizeMode="NoResize" 
 		Icon="/K4GDW.Url.Shortener.WPF;component/gdw16.ico">
+	<Window.Resources>
+		<Style TargetType="{x:Type RadioButton}" x:Key="defaultRadioButtonStyle">
+			<Style.Triggers>
+				<Trigger Property="IsEnabled" Value="True">
+					<Setter Property="Foreground" Value="Black"/>
+					<Setter Property="FontWeight" Value="Normal"/>
+				</Trigger>
+				<Trigger Property="IsEnabled" Value="False">
+					<Setter Property="Foreground" Value="LightGray"/>
+					<Setter Property="FontWeight" Value="Light"/>
+				</Trigger>
+			</Style.Triggers>
+		</Style>
+	</Window.Resources>
     <StackPanel Margin="0,0,0,10">
 		<Menu IsMainMenu="True">
 			<MenuItem Header="_File">
@@ -37,9 +51,9 @@
 		<TextBox Margin="10,10,10,10" Name="LongUrl" TextWrapping="Wrap" HorizontalScrollBarVisibility="Disabled"  Height="50" VerticalScrollBarVisibility="Auto"/>
 		<Border BorderBrush="Black" CornerRadius="5,5,5,5" BorderThickness="2,2,2,2" Margin="10,0,10,10" VerticalAlignment="Center">
 			<StackPanel Orientation="Horizontal" Margin="10,0,10,10" HorizontalAlignment="Center" VerticalAlignment="Center">
-				<RadioButton Name="UseBitly" Content="Bit.Ly" Margin="0,0,10,0" IsEnabled="{Binding CanUseBitly}"></RadioButton>
-				<RadioButton Name="UseIsgd" Content="Is.gd" Margin="0,0,10,0"></RadioButton>
-				<RadioButton Name="UseTinyUrl" Content="TinyUrl"></RadioButton>
+				<RadioButton Style="{StaticResource defaultRadioButtonStyle}" Name="UseBitly" Content="Bit.Ly" Margin="0,0,10,0" IsEnabled="{Binding CanUseBitly}"/>
+				<RadioButton Style="{StaticResource defaultRadioButtonStyle}" Name="UseIsgd" Content="Is.gd" Margin="0,0,10,0"/>
+				<RadioButton Style="{StaticResource defaultRadioButtonStyle}" Name="UseTinyUrl" Content="TinyUrl"/>
 			</StackPanel>
 		</Border>
 		<Button Name="ShortenUrl" Content="Get Shortened Url" Margin="10,0,10,10" />
