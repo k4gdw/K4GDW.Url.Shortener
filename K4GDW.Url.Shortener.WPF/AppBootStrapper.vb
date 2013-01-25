@@ -29,9 +29,10 @@ Public Class AppBootStrapper
 	End Sub
 
 	Private Function Config() As AppConfiguration
+
 		Dim configProvider As New ConfigurationFileConfigurationProvider(Of AppConfiguration) With {
 				.ConfigurationSection = "Settings",
-				.ConfigurationFile = "UrlShortenerConfig.xml",
+				.ConfigurationFile = String.Format("{0}\UrlShortenerConfig.xml", Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData)),
 				.PropertiesToEncrypt = "BitLyKey,BitLyLogin",
 				.EncryptionKey = "8cA_5yT&"}
 		Dim cnf As New AppConfiguration
