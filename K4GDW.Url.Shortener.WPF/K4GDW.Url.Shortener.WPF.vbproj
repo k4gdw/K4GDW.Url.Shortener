@@ -97,11 +97,6 @@
     <Compile Include="AppConfiguration.vb" />
     <Compile Include="Helpers.vb" />
     <Compile Include="Messages\PreferencesSavedEvent.vb" />
-    <Compile Include="Resources.ES.Designer.vb">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Resources.ES.resx</DependentUpon>
-    </Compile>
     <Compile Include="ViewModels\AboutViewModel.vb" />
     <Compile Include="ViewModels\PreferencesViewModel.vb" />
     <Compile Include="ViewModels\MainViewModel.vb" />
@@ -158,11 +153,6 @@
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>PublicVbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
-      <CustomToolNamespace>My.Resources</CustomToolNamespace>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources.ES.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.ES.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
     </EmbeddedResource>
     <None Include="My Project\Settings.settings">
