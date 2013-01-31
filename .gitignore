@@ -102,3 +102,4 @@ Backup*/
 UpgradeLog*.XML
 dotTrace\ Snapshots/*
 Deploy/
+_UpgradeReport*/
