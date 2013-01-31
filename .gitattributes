@@ -1,0 +1,25 @@
+*		text=auto
+*.cs	text diff=csharp
+*.java	text diff=java
+*.html	text diff=html
+*.css	text
+*.js 	text
+*.sql	text
+
+*.csproj text merge=union eol=crlf
+*.vbproj text merge=union eol=crlf
+*.sln    text merge=union eol=crlf
+
+*.docx   diff=astextplain
+*.DOCX   diff=astextplain
+
+*.vb	text diff=vb
+*.vbhtml text diff=html
+*.cshtml text diff=html
+
+# binary files
+*.png	binary
+*.jpg	binary
+*.gif	binary
+*.zip	binary
+*.nupkg	binary
