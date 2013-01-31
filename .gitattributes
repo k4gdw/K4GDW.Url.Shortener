@@ -1,4 +1,3 @@
-# * -crlf
 *		text=auto
 *.cs	text diff=csharp
 *.java	text diff=java
