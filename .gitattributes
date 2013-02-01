@@ -23,3 +23,6 @@
 *.gif	binary
 *.zip	binary
 *.nupkg	binary
+*.dll	binsry
+*.exe	binary
+*.ico	binary
