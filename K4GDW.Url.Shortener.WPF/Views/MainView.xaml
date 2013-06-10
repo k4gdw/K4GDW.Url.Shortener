@@ -1,17 +1,59 @@
 ﻿<Window x:Class="Views.MainView"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             mc:Ignorable="d" Height="220" Width="310"
-			 Title="K4GDW Url Shortener" ResizeMode="NoResize" Icon="/K4GDW.Url.Shortener.WPF;component/gdw16.ico">
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        mc:Ignorable="d" Height="230" Width="310"
+		Title="{Binding AppTitle, Mode=OneWay}" 
+		ResizeMode="NoResize" 
+		Icon="/K4GDW.Url.Shortener.WPF;component/gdw16.ico">
+	<Window.Resources>
+		<Style TargetType="{x:Type RadioButton}" x:Key="defaultRadioButtonStyle">
+			<Style.Triggers>
+				<Trigger Property="IsEnabled" Value="True">
+					<Setter Property="Foreground" Value="Black"/>
+					<Setter Property="FontWeight" Value="Normal"/>
+				</Trigger>
+				<Trigger Property="IsEnabled" Value="False">
+					<Setter Property="Foreground" Value="LightGray"/>
+					<Setter Property="FontWeight" Value="Light"/>
+				</Trigger>
+			</Style.Triggers>
+		</Style>
+	</Window.Resources>
     <StackPanel Margin="0,0,0,10">
+		<Menu IsMainMenu="True">
+			<MenuItem Header="_File">
+				<MenuItem Header="E_xit" Name="CloseApp">
+					<MenuItem.Icon>
+						<Image Source="Images\Close.ico"></Image>
+					</MenuItem.Icon>
+				</MenuItem>
+			</MenuItem>
+			<MenuItem Header="_Edit">
+				<MenuItem Header="_Preferences" Name="ShowPreferences">
+					<MenuItem.Icon>
+						<Image Source="Images\126_Edit.ico"></Image>
+					</MenuItem.Icon>
+				</MenuItem>
+			</MenuItem>
+			<MenuItem Header="_View">
+				<MenuItem Header="_Clear" Name="Clear">
+					<MenuItem.Icon>
+						<Image Source="Images\delete.ico"></Image>
+					</MenuItem.Icon>
+				</MenuItem>
+			</MenuItem>
+			<MenuItem Header="_Help">
+				<MenuItem Header="_About" Name="ShowAbout"></MenuItem>
+			</MenuItem>
+		</Menu>
 		<TextBox Margin="10,10,10,10" Name="LongUrl" TextWrapping="Wrap" HorizontalScrollBarVisibility="Disabled"  Height="50" VerticalScrollBarVisibility="Auto"/>
 		<Border BorderBrush="Black" CornerRadius="5,5,5,5" BorderThickness="2,2,2,2" Margin="10,0,10,10" VerticalAlignment="Center">
 			<StackPanel Orientation="Horizontal" Margin="10,0,10,10" HorizontalAlignment="Center" VerticalAlignment="Center">
-				<RadioButton Name="UseBitly" Content="Bit.Ly" Margin="0,0,10,0"></RadioButton>
-				<RadioButton Name="UseIsgd" Content="Is.gd" Margin="0,0,10,0"></RadioButton>
-				<RadioButton Name="UseTinyUrl" Content="TinyUrl"></RadioButton>
+				<RadioButton Style="{StaticResource defaultRadioButtonStyle}" Name="UseBitly" Content="Bit.Ly" Margin="0,0,10,0" IsEnabled="{Binding CanUseBitly}"/>
+				<RadioButton Style="{StaticResource defaultRadioButtonStyle}" Name="UseIsgd" Content="Is.gd" Margin="0,0,10,0"/>
+				<RadioButton Style="{StaticResource defaultRadioButtonStyle}" Name="UseTinyUrl" Content="TinyUrl"/>
 			</StackPanel>
 		</Border>
 		<Button Name="ShortenUrl" Content="Get Shortened Url" Margin="10,0,10,10" />

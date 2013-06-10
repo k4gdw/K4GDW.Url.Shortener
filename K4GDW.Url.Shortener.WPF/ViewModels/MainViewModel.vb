@@ -2,14 +2,19 @@
 Imports System.ComponentModel.Composition
 Imports System.Text.RegularExpressions
 Imports System.Net
+Imports System.Dynamic
 Imports K4GDW.Infrastructure.Logging
+Imports System.Reflection
+Imports K4GDW.Url.Shortener.Messages
+
 
 Namespace ViewModels
 
 	<Export(GetType(MainViewModel))>
 	Public Class MainViewModel
 		Inherits PropertyChangedBase
-
+		Implements IHandle(Of PreferencesSavedEvent)
+		
 		Private _LongUrl As String
 		Private _ShortUrl As String
 		Private _UseBitly As Boolean = True
@@ -19,12 +24,20 @@ Namespace ViewModels
 
 		Private ReadOnly _logger As ILogger
 
-		Private _config As AppConfiguration
+		Private ReadOnly _config As AppConfiguration
+
+		Private ReadOnly _windowManager As IWindowManager
+
+		Private ReadOnly _events As IEventAggregator
 
 		<ImportingConstructor()>
-		Public Sub New(logger As ILogger, config As AppConfiguration)
+		Public Sub New(logger As ILogger, config As AppConfiguration, windowManager As IWindowManager, events As IEventAggregator)
 			_logger = logger
 			_config = config
+			AppTitle = GetTitle()
+			_windowManager = windowManager
+			_events = events
+			_events.Subscribe(Me)
 			Select Case _config.DefaultShortener
 				Case Shortener.BitLy
 					UseBitly = True
@@ -40,6 +53,36 @@ Namespace ViewModels
 					UseTinyUrl = True
 			End Select
 		End Sub
+
+		''' <summary>
+		''' Gets the title.
+		''' </summary>
+		''' <returns>System.String.</returns>
+		Private Function GetTitle() As String
+			Return String.Format("K4GDW Url Shortener - {0}", FileVersionInfo.GetVersionInfo("K4GDW.Url.Shortener.WPF.exe").FileVersion)
+		End Function
+
+		Private _AppTitle As String
+
+		''' <summary>
+		''' Gets or sets the AppTitle property and raises the PropertyChanged event.
+		''' </summary>
+		''' <remarks>
+		''' <para>
+		''' This template works with the Caliburn.Micro MVVM framework.
+		''' </para>
+		''' </remarks>
+		Public Property AppTitle As String
+			Get
+				Return _AppTitle
+			End Get
+			Private Set(ByVal value As String)
+				If Not _AppTitle = value Then
+					_AppTitle = value
+					NotifyOfPropertyChange(Function() AppTitle)
+				End If
+			End Set
+		End Property
 
 		''' <summary>
 		''' Gets or sets the UseTinyUrl property and raises the PropertyChanged event.
@@ -182,6 +225,29 @@ Namespace ViewModels
 		End Property
 
 		''' <summary>
+		''' Gets a value indicating whether this instance can use bitly.
+		''' </summary>
+		''' <value><c>true</c> if this instance can use bitly; otherwise, <c>false</c>.</value>
+		''' <remarks></remarks>
+		Public ReadOnly Property CanUseBitly As Boolean
+			Get
+				Return BitLyCredsNotEmpty()
+			End Get
+		End Property
+
+
+		''' <summary>
+		''' Bits the ly creds not empty.
+		''' </summary>
+		''' <returns><c>true</c> if XXXX, <c>false</c> otherwise</returns>
+		Private Function BitLyCredsNotEmpty() As Boolean
+			If Not String.IsNullOrEmpty(_config.BitLyLogin) AndAlso Not String.IsNullOrEmpty(_config.BitLyKey) Then
+				Return True
+			End If
+			Return False
+		End Function
+
+		''' <summary>
 		''' Gets a value indicating whether this instance can shorten longUrl.
 		''' </summary>
 		''' <value><c>true</c> if this instance can shorten longUrl; otherwise, <c>false</c>.</value>
@@ -217,7 +283,7 @@ Namespace ViewModels
 				Processing = True
 				If _UseBitly Then
 					selectedService = "Bit.Ly"
-					sUrl = Await BitlyApi.ShortenUrlAsync(url)
+					sUrl = Await BitlyApi.ShortenUrlAsync(url, _config.BitLyKey, _config.BitLyLogin)
 				ElseIf _UseIsgd Then
 					selectedService = "Is.gd"
 					sUrl = Await IsGd.ShortenUrlAsync(url)
@@ -255,7 +321,7 @@ Namespace ViewModels
 		''' </summary>
 		''' <param name="url">The URL.</param>
 		''' <param name="maxTries">The max tries.</param>
-		Private Sub CopyUrlToClipboard(url As String, Optional maxTries As Int16 = 3)
+		Public Sub CopyUrlToClipboard(url As String, Optional maxTries As Int16 = 3)
 			Dim success As Boolean = False
 			Dim tries As Int16 = 0
 			While Not success AndAlso tries < maxTries
@@ -268,6 +334,43 @@ Namespace ViewModels
 					success = False
 				End Try
 			End While
+		End Sub
+
+		''' <summary>
+		''' Closes the app.
+		''' </summary>
+		Public Sub CloseApp()
+			Application.Current.Shutdown()
+		End Sub
+
+		Public Sub Clear()
+			ShortUrl = String.Empty
+			LongUrl = String.Empty
+		End Sub
+
+		''' <summary>
+		''' Shows the preferences screen.
+		''' </summary>
+		Public Sub ShowPreferences()
+			Dim settings As Object = New ExpandoObject
+			settings.WindowStartupLocation = WindowStartupLocation.CenterScreen
+
+			_windowManager.ShowDialog(New PreferencesViewModel(_logger, _config, _events), Nothing, settings)
+		End Sub
+
+		''' <summary>
+		''' Shows the about screen.
+		''' </summary>
+		Public Sub ShowAbout()
+			Dim settings As Object = New ExpandoObject
+			settings.WindowStartupLocation = WindowStartupLocation.CenterScreen
+
+			_windowManager.ShowDialog(New AboutViewModel(_events), Nothing, settings)
+		End Sub
+
+		Public Sub Handle(message As PreferencesSavedEvent) Implements IHandle(Of PreferencesSavedEvent).Handle
+			_config.Read()
+			NotifyOfPropertyChange(Function() CanUseBitly)
 		End Sub
 
 	End Class

@@ -104,3 +104,4 @@ dotTrace\ Snapshots/*
 Deploy/
 _UpgradeReport*/
 *.orig
+UpgradeLog.XML
