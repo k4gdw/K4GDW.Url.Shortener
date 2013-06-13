@@ -10,7 +10,7 @@
 	    <SolutionDir>$(MSBuildProjectDirectory)\..\</SolutionDir>
 		<Major>4</Major>
 		<Minor>2</Minor>
-		<Revision>0</Revision>
+		<Revision>1</Revision>
 		<Build Condition=" '$(BuildNo)' == '' ">.$(BUILD_NUMBER)</Build>
 		<Build Condition=" '$(BuildNo)' != '' ">.$(BuildNo)</Build>
   	</PropertyGroup>
@@ -100,7 +100,7 @@
 		<Copy SourceFiles="@(Binaries)"
 			  DestinationFolder="$(SolutionDir)Deploy\temp"/>
 		<Exec Command="7za.exe a $(SolutionDir)\Deploy\K4GDW.Url.Shortener.zip $(SolutionDir)Deploy\temp\**\*.*" />
-		<Exec Command="7za.exe a $(SolutionDir)\Deploy\K4GDW.Url.Shortener.zip $(SolutionDir)Deploy\temp\*.*" />
+		<!--<Exec Command="7za.exe a $(SolutionDir)\Deploy\K4GDW.Url.Shortener.zip $(SolutionDir)Deploy\temp\*.*" />-->
 		<Exec Command="md5.exe -n -o$(SolutionDir)\Deploy\md5.txt $(SolutionDir)\Deploy\K4GDW.Url.Shortener.zip" />
 	</Target>
 	

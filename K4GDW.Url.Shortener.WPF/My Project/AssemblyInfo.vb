@@ -16,10 +16,10 @@ Imports System.Reflection
 Imports System.Resources
 Imports System.Runtime.CompilerServices
 Imports System.Runtime.InteropServices
-<Assembly: AssemblyCompany("K4GDW Software"),  _
- Assembly: AssemblyCopyright("Copyright © K4GDW 2011,2012,2013"),  _
- Assembly: AssemblyTrademark("K4GDW"),  _
- Assembly: AssemblyVersion("4.2"),  _
- Assembly: AssemblyFileVersion("4.2.0.1"),  _
- Assembly: AssemblyInformationalVersion("4.2.0.1")> 
+<Assembly: AssemblyCompany("K4GDW Software"), _
+ Assembly: AssemblyCopyright("Copyright © K4GDW 2011,2012,2013"), _
+ Assembly: AssemblyTrademark("K4GDW"), _
+ Assembly: AssemblyVersion("4.2"), _
+ Assembly: AssemblyFileVersion("4.2.1.2"), _
+ Assembly: AssemblyInformationalVersion("4.2.1.2")> 
 

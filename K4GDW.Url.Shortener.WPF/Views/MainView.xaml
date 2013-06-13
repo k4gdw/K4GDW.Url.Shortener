@@ -3,12 +3,12 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        mc:Ignorable="d" Height="230" Width="310"
+        mc:Ignorable="d"
 		Title="{Binding AppTitle, Mode=OneWay}" 
 		ResizeMode="NoResize" 
-		Icon="/K4GDW.Url.Shortener.WPF;component/gdw16.ico">
+		Icon="/K4GDW.Url.Shortener.WPF;component/gdw16.ico" SizeToContent="Height" Width="383">
 	<Window.Resources>
-		<Style TargetType="{x:Type RadioButton}" x:Key="defaultRadioButtonStyle">
+		<Style TargetType="{x:Type RadioButton}" x:Key="DefaultRadioButtonStyle">
 			<Style.Triggers>
 				<Trigger Property="IsEnabled" Value="True">
 					<Setter Property="Foreground" Value="Black"/>
@@ -48,12 +48,12 @@
 				<MenuItem Header="_About" Name="ShowAbout"></MenuItem>
 			</MenuItem>
 		</Menu>
-		<TextBox Margin="10,10,10,10" Name="LongUrl" TextWrapping="Wrap" HorizontalScrollBarVisibility="Disabled"  Height="50" VerticalScrollBarVisibility="Auto"/>
+		<TextBox Margin="10,10,10,10" Name="LongUrl" TextWrapping="Wrap" HorizontalScrollBarVisibility="Disabled"  Height="50" VerticalScrollBarVisibility="Auto" MaxLines="5" MaxWidth="357"/>
 		<Border BorderBrush="Black" CornerRadius="5,5,5,5" BorderThickness="2,2,2,2" Margin="10,0,10,10" VerticalAlignment="Center">
 			<StackPanel Orientation="Horizontal" Margin="10,0,10,10" HorizontalAlignment="Center" VerticalAlignment="Center">
-				<RadioButton Style="{StaticResource defaultRadioButtonStyle}" Name="UseBitly" Content="Bit.Ly" Margin="0,0,10,0" IsEnabled="{Binding CanUseBitly}"/>
-				<RadioButton Style="{StaticResource defaultRadioButtonStyle}" Name="UseIsgd" Content="Is.gd" Margin="0,0,10,0"/>
-				<RadioButton Style="{StaticResource defaultRadioButtonStyle}" Name="UseTinyUrl" Content="TinyUrl"/>
+				<RadioButton Style="{StaticResource DefaultRadioButtonStyle}" Name="UseBitly" Content="Bit.Ly" Margin="0,0,10,0" IsEnabled="{Binding CanUseBitly}"/>
+				<RadioButton Style="{StaticResource DefaultRadioButtonStyle}" Name="UseIsgd" Content="Is.gd" Margin="0,0,10,0"/>
+				<RadioButton Style="{StaticResource DefaultRadioButtonStyle}" Name="UseTinyUrl" Content="TinyUrl"/>
 			</StackPanel>
 		</Border>
 		<Button Name="ShortenUrl" Content="Get Shortened Url" Margin="10,0,10,10" />

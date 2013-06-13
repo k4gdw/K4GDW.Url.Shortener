@@ -4,7 +4,6 @@ Imports System.Text.RegularExpressions
 Imports System.Net
 Imports System.Dynamic
 Imports K4GDW.Infrastructure.Logging
-Imports System.Reflection
 Imports K4GDW.Url.Shortener.Messages
 
 
@@ -15,12 +14,12 @@ Namespace ViewModels
 		Inherits PropertyChangedBase
 		Implements IHandle(Of PreferencesSavedEvent)
 		
-		Private _LongUrl As String
-		Private _ShortUrl As String
-		Private _UseBitly As Boolean = True
-		Private _UseIsgd As Boolean
-		Private _UseTinyUrl As Boolean
-		Private _Processing As Boolean = False
+        Private _longUrl As String
+        Private _shortUrl As String
+        Private _useBitly As Boolean = True
+        Private _useIsgd As Boolean
+        Private _useTinyUrl As Boolean
+        Private _processing As Boolean = False
 
 		Private ReadOnly _logger As ILogger
 
@@ -62,7 +61,7 @@ Namespace ViewModels
 			Return String.Format("K4GDW Url Shortener - {0}", FileVersionInfo.GetVersionInfo("K4GDW.Url.Shortener.WPF.exe").FileVersion)
 		End Function
 
-		Private _AppTitle As String
+        Private _appTitle As String
 
 		''' <summary>
 		''' Gets or sets the AppTitle property and raises the PropertyChanged event.
@@ -74,7 +73,7 @@ Namespace ViewModels
 		''' </remarks>
 		Public Property AppTitle As String
 			Get
-				Return _AppTitle
+                Return _appTitle
 			End Get
 			Private Set(ByVal value As String)
 				If Not _AppTitle = value Then
@@ -94,16 +93,16 @@ Namespace ViewModels
 		''' </remarks>
 		Public Property UseTinyUrl As Boolean
 			Get
-				Return _UseTinyUrl
+                Return _useTinyUrl
 			End Get
 			Set(ByVal value As Boolean)
-				If Not _UseTinyUrl = value Then
-					_UseTinyUrl = value
-					If value Then
-						SaveDefaultShortener(Shortener.TinyUrl)
-					End If
-					NotifyOfPropertyChange(Function() UseTinyUrl)
-				End If
+                If Not _useTinyUrl = value Then
+                    _useTinyUrl = value
+                    If value Then
+                        SaveDefaultShortener(Shortener.TinyUrl)
+                    End If
+                    NotifyOfPropertyChange(Function() UseTinyUrl)
+                End If
 			End Set
 		End Property
 
@@ -126,16 +125,16 @@ Namespace ViewModels
 		''' </remarks>
 		Public Property UseIsgd As Boolean
 			Get
-				Return _UseIsgd
+                Return _useIsgd
 			End Get
 			Set(ByVal value As Boolean)
-				If Not _UseIsgd = value Then
-					_UseIsgd = value
-					If value Then
-						SaveDefaultShortener(Shortener.IsGd)
-					End If
-					NotifyOfPropertyChange(Function() UseIsgd)
-				End If
+                If Not _useIsgd = value Then
+                    _useIsgd = value
+                    If value Then
+                        SaveDefaultShortener(Shortener.IsGd)
+                    End If
+                    NotifyOfPropertyChange(Function() UseIsgd)
+                End If
 			End Set
 		End Property
 
@@ -149,16 +148,16 @@ Namespace ViewModels
 		''' </remarks>
 		Public Property UseBitly As Boolean
 			Get
-				Return _UseBitly
+                Return _useBitly
 			End Get
 			Set(ByVal value As Boolean)
-				If Not _UseBitly = value Then
-					_UseBitly = value
-					If value Then
-						SaveDefaultShortener(Shortener.BitLy)
-					End If
-					NotifyOfPropertyChange(Function() UseBitly)
-				End If
+                If Not _useBitly = value Then
+                    _useBitly = value
+                    If value Then
+                        SaveDefaultShortener(Shortener.BitLy)
+                    End If
+                    NotifyOfPropertyChange(Function() UseBitly)
+                End If
 			End Set
 		End Property
 
@@ -172,14 +171,14 @@ Namespace ViewModels
 		''' </remarks>
 		Public Property LongUrl As String
 			Get
-				Return _LongUrl
+                Return _longUrl
 			End Get
 			Set(ByVal value As String)
-				If Not _LongUrl = value Then
-					_LongUrl = value
-					NotifyOfPropertyChange(Function() LongUrl)
-					NotifyOfPropertyChange(Function() CanShortenUrl)
-				End If
+                If Not _longUrl = value Then
+                    _longUrl = value
+                    NotifyOfPropertyChange(Function() LongUrl)
+                    NotifyOfPropertyChange(Function() CanShortenUrl)
+                End If
 			End Set
 		End Property
 
@@ -193,13 +192,13 @@ Namespace ViewModels
 		''' </remarks>
 		Public Property ShortUrl As String
 			Get
-				Return _ShortUrl
+                Return _shortUrl
 			End Get
 			Set(ByVal value As String)
-				If Not _ShortUrl = value Then
-					_ShortUrl = value
-					NotifyOfPropertyChange(Function() ShortUrl)
-				End If
+                If Not _shortUrl = value Then
+                    _shortUrl = value
+                    NotifyOfPropertyChange(Function() ShortUrl)
+                End If
 			End Set
 		End Property
 
@@ -213,14 +212,14 @@ Namespace ViewModels
 		''' </remarks>
 		Public Property Processing As Boolean
 			Get
-				Return _Processing
+                Return _processing
 			End Get
 			Private Set(ByVal value As Boolean)
-				If Not _Processing = value Then
-					_Processing = value
-					NotifyOfPropertyChange(Function() Processing)
-					NotifyOfPropertyChange(Function() CanShortenUrl)
-				End If
+                If Not _processing = value Then
+                    _processing = value
+                    NotifyOfPropertyChange(Function() Processing)
+                    NotifyOfPropertyChange(Function() CanShortenUrl)
+                End If
 			End Set
 		End Property
 
@@ -281,18 +280,18 @@ Namespace ViewModels
 			Try
 				PrependHttp(url)
 				Processing = True
-				If _UseBitly Then
-					selectedService = "Bit.Ly"
-					sUrl = Await BitlyApi.ShortenUrlAsync(url, _config.BitLyKey, _config.BitLyLogin)
-				ElseIf _UseIsgd Then
-					selectedService = "Is.gd"
-					sUrl = Await IsGd.ShortenUrlAsync(url)
-				ElseIf _UseTinyUrl Then
-					selectedService = "TinyUrl"
-					sUrl = Await TinyUrl.ShortenUrlAsync(url)
-				Else
-					Throw New ApplicationException(My.Resources.NoShortenerSelectedMessage)
-				End If
+                If _useBitly Then
+                    selectedService = "Bit.Ly"
+                    sUrl = Await BitlyApi.ShortenUrlAsync(url, _config.BitLyKey, _config.BitLyLogin)
+                ElseIf _useIsgd Then
+                    selectedService = "Is.gd"
+                    sUrl = Await IsGd.ShortenUrlAsync(url)
+                ElseIf _useTinyUrl Then
+                    selectedService = "TinyUrl"
+                    sUrl = Await TinyUrl.ShortenUrlAsync(url)
+                Else
+                    Throw New ApplicationException(My.Resources.NoShortenerSelectedMessage)
+                End If
 				ShortUrl = sUrl
 				CopyUrlToClipboard(sUrl, 1)
 			Catch ex As WebException
